@@ -1,0 +1,12 @@
+[submodule "bundle/sensible"]
+	path = bundle/sensible
+	url = git@github.com:tpope/vim-sensible
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = git@github.com:kien/ctrlp.vim
+[submodule "bundle/vim-unimpaired"]
+	path = bundle/vim-unimpaired
+	url = git@github.com:tpope/vim-unimpaired
+[submodule "bundle/detectindent"]
+	path = bundle/detectindent
+	url = git@github.com:ciaranm/detectindent
