@@ -1,5 +1,10 @@
 set tags=tags;/
+set tags=./tags,tags;$CSDIR;$HOME
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+map \t4  [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+map \t\  :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map \t]  :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+map \ts  :exec("cs f s ".expand("<cword>"))<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 set cindent
