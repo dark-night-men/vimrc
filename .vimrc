@@ -35,12 +35,16 @@ set tabpagemax=10
 
 if has("gui_running")
   if has("gui_gtk2")
+
+    ""set guifont=Monospace\ 5
     set guifont=Monospace\ 13
     ""set guifont=Verdana\ 13
   elseif has("gui_win32")
     set guifont=Consolas:h11:cANSI
   endif
 endif
+
+:hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 
 execute pathogen#infect()
 syntax on
@@ -61,8 +65,41 @@ call pathogen#helptags()
 :set backspace+=start,eol,indent
 
 
-":cs add ./cscope.out
-:cs add ${CSDIR}/cscope.out
-:set makeprg=~/scripts/g_script.csh\ %\
+:set tags=${CSDIR}/.tags;/
 
-:set tags=.tags;/
+if has('cscope')
+    set cscopetag cscopeverbose
+
+    if has('quickfix')
+        set cscopequickfix=s-,c-,d-,i-,t-,e-
+    endif
+
+    cnoreabbrev csa cs add
+    cnoreabbrev csf cs find
+    cnoreabbrev csk cs kill
+    cnoreabbrev csr cs reset
+    cnoreabbrev css cs show
+    cnoreabbrev csh cs help
+
+    ""command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+
+    ":cs add ./cscope.out
+    :cs add ${CSDIR}/cscope.out
+endif
+
+":set makeprg=~/scripts/g_script.csh\ %\
+:set makeprg=~/scripts/g_script.sh\ $*
+
+:hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
+set foldmethod=indent
+
+
+if &diff
+    colorscheme slate
+endif
+"""""""""""""""""""""""""
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
