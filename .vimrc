@@ -1,4 +1,5 @@
-set tags=tags;/
+set tags=./tags,tags;$CSDIR;$HOME
+":set tags=${CSDIR}/.tags;/
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
@@ -65,7 +66,7 @@ call pathogen#helptags()
 :set backspace+=start,eol,indent
 
 
-:set tags=${CSDIR}/.tags;/
+":set tags=${CSDIR}/.tags;/
 
 if has('cscope')
     set cscopetag cscopeverbose
