@@ -101,13 +101,8 @@ call pathogen#helptags()
 
 ":cs add ./cscope.out
 :cs add ${CSDIR}/cscope.out
-"<<<<<<< HEAD
+
 ":set makeprg=~/scripts/makeprg\ %\ $*
 :set makeprg=~/scripts/makeprg\ $*
 ":set foldmethod=syntax
 :set foldmethod=indent
-"=======
-":set makeprg=~/scripts/g_script.csh\ %\
-
-:set tags=.tags;/
-">>>>>>> 02fce544058f3b3632bfa90d7f8f7f61a819e18a
