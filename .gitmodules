@@ -10,3 +10,15 @@
 [submodule "bundle/detectindent"]
 	path = bundle/detectindent
 	url = git@github.com:ciaranm/detectindent
+[submodule "bundle/python-mode"]
+	path = bundle/python-mode
+	url = git://github.com/klen/python-mode.git
+[submodule "bundle/fugitive"]
+	path = bundle/fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule "/home/ubuntu/.vim/bundle/Vundle.vim"]
+	path = /home/ubuntu/.vim/bundle/Vundle.vim
+	url = git://github.com/gmarik/Vundle.vim.git
+[submodule "/home/ubuntu/.vim/bundle/YouCompleteMe"]
+	path = /home/ubuntu/.vim/bundle/YouCompleteMe
+	url = git://github.com/Valloric/YouCompleteMe.git
