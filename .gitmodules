@@ -16,9 +16,9 @@
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = http://github.com/tpope/vim-fugitive.git
-[submodule "/home/ubuntu/.vim/bundle/Vundle.vim"]
-	path = /home/ubuntu/.vim/bundle/Vundle.vim
+[submodule "bundle/Vundle.vim"]
+	path = bundle/Vundle.vim
 	url = git://github.com/gmarik/Vundle.vim.git
-[submodule "/home/ubuntu/.vim/bundle/YouCompleteMe"]
-	path = /home/ubuntu/.vim/bundle/YouCompleteMe
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
 	url = git://github.com/Valloric/YouCompleteMe.git
