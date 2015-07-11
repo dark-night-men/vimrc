@@ -31,7 +31,7 @@ filetype plugin indent on    " required
 " " Put your non-Plugin stuff after this line
 
 "
-set tags=tags;/
+set tags=./tags,tags
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
@@ -87,7 +87,9 @@ call pathogen#helptags()
 
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
-:colo desert
+":colo desert
+:colo elflord
+
 :syntax on
 :set hlsearch
 
@@ -97,5 +99,8 @@ call pathogen#helptags()
 ":cs add ./cscope.out
 :cs add ${CSDIR}/cscope.out
 ":set makeprg=~/scripts/g_script.csh\ %\
+":set makeprg=~/scripts/makeprg\ %\
 
-:set tags=.tags;/
+":set tags=.tags;/
+:set grepprg=ack\ --nogroup\ $*
+:set foldmethod=indent
