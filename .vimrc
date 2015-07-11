@@ -96,6 +96,6 @@ call pathogen#helptags()
 
 ":cs add ./cscope.out
 :cs add ${CSDIR}/cscope.out
-:set makeprg=~/scripts/g_script.csh\ %\
+":set makeprg=~/scripts/g_script.csh\ %\
 
 :set tags=.tags;/
