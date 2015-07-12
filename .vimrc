@@ -84,11 +84,16 @@ call pathogen#incubate()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_show_diagnostics_ui = 0
+"let g:ycm_echo_current_diagnostic = 0
+"let g:syntastic_echo_current_error = 0
 
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 ":colo desert
-:colo elflord
+":colo elflord
+:colo industry
 
 :syntax on
 :set hlsearch
@@ -100,6 +105,7 @@ call pathogen#helptags()
 :cs add ${CSDIR}/cscope.out
 ":set makeprg=~/scripts/g_script.csh\ %\
 ":set makeprg=~/scripts/makeprg\ %\
+:set makeprg=make\ -j8
 
 ":set tags=.tags;/
 :set grepprg=ack\ --nogroup\ $*
