@@ -11,6 +11,7 @@ call vundle#begin()
 " " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'bling/vim-airline'
 
 
 " All of your Plugins must be added before the following line
