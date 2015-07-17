@@ -10,6 +10,9 @@ call vundle#begin()
 "
 " " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/a.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
