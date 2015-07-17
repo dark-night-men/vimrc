@@ -1,4 +1,4 @@
-set tags=./tags,tags;$CSDIR;$HOME
+set tags=./.tags,.tags,$CSDIR/.tags;$CSDIR;$HOME
 ":set tags=${CSDIR}/.tags;/
 
 "Vundle
@@ -93,7 +93,8 @@ call pathogen#helptags()
 
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
-:colo desert
+":colorscheme desert
+:colorscheme elflord
 :syntax on
 :set hlsearch
 
@@ -130,7 +131,8 @@ set foldmethod=indent
 
 
 if &diff
-    colorscheme slate
+    "colorscheme slate
+    colorscheme elflord
 endif
 """""""""""""""""""""""""
 
@@ -138,3 +140,9 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+
+let g:ycm_server_use_vim_stdout = 1
+let g:ycm_server_log_level = 'debug'
+
+let g:ycm_path_to_python_interpreter = '/grid/common/bin/python'
