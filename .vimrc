@@ -1,6 +1,4 @@
 set tags=./.tags,.tags,$CSDIR/.tags;$CSDIR;$HOME
-":set tags=${CSDIR}/.tags;/
-
 "Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -13,7 +11,32 @@ call vundle#begin()
 "
 " " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/a.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
+Plugin 'Shougo/unite.vim'
+Plugin 'weynhamz/vim-plugin-minibufexpl'
+Plugin 'mbbill/undotree'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-signify'
+Plugin 'tomtom/quickfixsigns_vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'gcmt/taboo.vim'
+Plugin 'szw/vim-ctrlspace'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'ciaranm/detectindent'
+Plugin 'powerline/powerline'
+Plugin 'klen/python-mode'
+Plugin 'tpope/vim-sensible'
+Plugin 'Zuckonit/vim-airline-todo'
+Plugin 'tpope/vim-unimpaired'
 
 
 " All of your Plugins must be added before the following line
@@ -34,6 +57,7 @@ filetype plugin indent on    " required
 " " Put your non-Plugin stuff after this line
 
 "
+set tags=./tags,tags
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
@@ -70,8 +94,6 @@ set tabpagemax=10
 
 if has("gui_running")
   if has("gui_gtk2")
-
-    ""set guifont=Monospace\ 5
     set guifont=Monospace\ 13
     ""set guifont=Verdana\ 13
   elseif has("gui_win32")
@@ -79,8 +101,7 @@ if has("gui_running")
   endif
 endif
 
-:hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
-
+":hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -90,11 +111,18 @@ call pathogen#incubate()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_show_diagnostics_ui = 0
+"let g:ycm_echo_current_diagnostic = 0
+"let g:syntastic_echo_current_error = 0
+let g:ycm_path_to_python_interpreter = '/grid/common/bin/python'
 
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
-":colorscheme desert
-:colorscheme elflord
+":colo desert
+":colo elflord
+:colo industry
+
 :syntax on
 :set hlsearch
 
@@ -123,6 +151,7 @@ if has('cscope')
     :cs add ${CSDIR}/cscope.out
 endif
 
+:set makeprg=~/scripts/g_script.sh\ $*
 ":set makeprg=~/scripts/g_script.csh\ %\
 :set makeprg=~/scripts/g_script.sh\ $*
 
@@ -142,7 +171,9 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 
-let g:ycm_server_use_vim_stdout = 1
-let g:ycm_server_log_level = 'debug'
+"let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_server_log_level = 'debug'
 
-let g:ycm_path_to_python_interpreter = '/grid/common/bin/python'
+":set tags=.tags;/
+":set grepprg=ack\ --nogroup\ $*
+":set foldmethod=indent
