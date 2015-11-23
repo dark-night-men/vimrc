@@ -25,7 +25,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-signify'
 Plugin 'tomtom/quickfixsigns_vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
 Plugin 'szw/vim-ctrlspace'
@@ -113,10 +113,9 @@ call pathogen#helptags()
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
-"let g:ycm_echo_current_diagnostic = 0
-"let g:syntastic_echo_current_error = 0
+let g:ycm_echo_current_diagnostic = 0
+let g:syntastic_echo_current_error = 0
 let g:ycm_path_to_python_interpreter = '/grid/common/bin/python'
-
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 ":colo desert
@@ -153,7 +152,6 @@ endif
 
 :set makeprg=~/scripts/g_script.sh\ $*
 ":set makeprg=~/scripts/g_script.csh\ %\
-:set makeprg=~/scripts/g_script.sh\ $*
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 set foldmethod=indent
@@ -162,6 +160,15 @@ set foldmethod=indent
 if &diff
     "colorscheme slate
     colorscheme elflord
+    if has("gui_running")
+        if has("gui_gtk2")
+            set guifont=Monospace\ 7
+            ""set guifont=Verdana\ 13
+        elseif has("gui_win32")
+            set guifont=Consolas:h11:cANSI
+        endif
+    endif
+
 endif
 """""""""""""""""""""""""
 
@@ -170,6 +177,7 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+runtime ftplugin/man.vim
 
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_server_log_level = 'debug'
