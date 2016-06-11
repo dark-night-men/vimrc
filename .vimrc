@@ -24,7 +24,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-signify'
 Plugin 'tomtom/quickfixsigns_vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
 Plugin 'szw/vim-ctrlspace'
@@ -36,6 +36,8 @@ Plugin 'klen/python-mode'
 Plugin 'tpope/vim-sensible'
 Plugin 'Zuckonit/vim-airline-todo'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'easymotion/vim-easymotion'
 
 
 " All of your Plugins must be added before the following line
@@ -57,9 +59,14 @@ filetype plugin indent on    " required
 
 "
 set tags=./tags,tags
+
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+nmap <F8> :TagbarToggle<CR>
+nmap <F6> :TlistToggle<CR>
+
+
 set cindent
 set smartindent
 set expandtab
@@ -118,7 +125,9 @@ let g:ycm_show_diagnostics_ui = 0
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 ":colo desert
 ":colo elflord
-:colo industry
+":colo industry
+":colo darkblue
+:colo darkZ
 
 :syntax on
 :set hlsearch
