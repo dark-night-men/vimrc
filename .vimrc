@@ -38,7 +38,7 @@ Plugin 'Zuckonit/vim-airline-todo'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
-
+Plugin 'tpope/vim-dispatch'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -66,6 +66,9 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F6> :TlistToggle<CR>
 
+map <Leader>e :MBEOpen<cr>
+map <Leader>c :MBEClose<cr>
+map <Leader>t :MBEToggle<cr>
 
 set cindent
 set smartindent
@@ -127,7 +130,8 @@ let g:ycm_show_diagnostics_ui = 0
 ":colo elflord
 ":colo industry
 ":colo darkblue
-:colo darkZ
+":colo darkZ
+:colo koehler
 
 :syntax on
 :set hlsearch
