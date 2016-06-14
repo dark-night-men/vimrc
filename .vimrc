@@ -1,3 +1,16 @@
+"function! InsertTabWrapper(direction)
+"    let col = col('.') - 1
+"    if !col || getline('.')[col - 1] !~ '\k'
+"        return "\<tab>"
+"    elseif "backward" == a:direction
+"        return "\<c-p>"
+"    else
+"        return "\<c-n>"
+"    endif
+"endfunction
+"inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
+"inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
+
 set tags=./.tags,.tags,$CSDIR/.tags;$CSDIR;$HOME
 "Vundle
 set nocompatible              " be iMproved, required
@@ -14,7 +27,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/a.vim'
-Plugin 'Valloric/YouCompleteMe'
+
+"Plugin 'Valloric/YouCompleteMe'
+
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 Plugin 'Shougo/unite.vim'
@@ -25,7 +40,9 @@ Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-signify'
 Plugin 'tomtom/quickfixsigns_vim'
+
 "Plugin 'scrooloose/syntastic'
+
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
 Plugin 'szw/vim-ctrlspace'
@@ -37,7 +54,7 @@ Plugin 'klen/python-mode'
 Plugin 'tpope/vim-sensible'
 Plugin 'Zuckonit/vim-airline-todo'
 Plugin 'tpope/vim-unimpaired'
-
+Plugin 'tpope/vim-dispatch'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -56,8 +73,6 @@ filetype plugin indent on    " required
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 
-"
-set tags=./tags,tags
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
@@ -101,7 +116,7 @@ if has("gui_running")
   endif
 endif
 
-":hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
+:hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -111,24 +126,27 @@ call pathogen#incubate()
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_echo_current_diagnostic = 0
-let g:syntastic_echo_current_error = 0
-let g:ycm_path_to_python_interpreter = '/grid/common/bin/python'
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_show_diagnostics_ui = 0
+"let g:ycm_echo_current_diagnostic = 0
+"let g:syntastic_echo_current_error = 0
+"let g:ycm_path_to_python_interpreter = '/grid/common/bin/python'
+
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 ":colo desert
 ":colo elflord
-:colo industry
+":colo industry
+:colo darkblue
 
 :syntax on
 :set hlsearch
 
 :set backspace+=start,eol,indent
 
-
-":set tags=${CSDIR}/.tags;/
+:set complete-=i
 
 if has('cscope')
     set cscopetag cscopeverbose
@@ -158,8 +176,8 @@ set foldmethod=indent
 
 
 if &diff
-    "colorscheme slate
-    colorscheme elflord
+    colorscheme slate
+    "colorscheme elflord
     if has("gui_running")
         if has("gui_gtk2")
             set guifont=Monospace\ 7
@@ -182,6 +200,5 @@ runtime ftplugin/man.vim
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_server_log_level = 'debug'
 
-":set tags=.tags;/
 ":set grepprg=ack\ --nogroup\ $*
 ":set foldmethod=indent

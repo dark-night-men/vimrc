@@ -1,11 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/net/msc156/export/home/agibalov/work/wspaces/agibalov_pvs1310_W2/pvs/src/libguireport/src/linuxopt_64'
-let g:netrw_dirhist_2='/home/agibalov/.vim'
-let g:netrw_dirhist_3='/net/msc156/export/home/agibalov/work/wspaces/agibalov_pvs1410_W1/pvs'
-let g:netrw_dirhist_4='/net/msc156/export/home/agibalov/work/wspaces/agibalov_pvs1410_W1'
-let g:netrw_dirhist_5='/home/agibalov/.vim/plugin'
-let g:netrw_dirhist_6='/export/home/agibalov/downloads'
-let g:netrw_dirhist_7='/home/agibalov'
-let g:netrw_dirhist_8='/home'
-let g:netrw_dirhist_9='/net/msc156/export/home/agibalov/work/wspaces/agibalov_pvs1412_W2/pvs/Makefiles'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/net/msc156/export/home/agibalov/work/wspaces/agibalov_pvs1520_W9/pvs/src/libguireport/src'
