@@ -54,6 +54,8 @@ Plugin 'klen/python-mode'
 Plugin 'tpope/vim-sensible'
 Plugin 'Zuckonit/vim-airline-todo'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-dispatch'
 
 " All of your Plugins must be added before the following line
@@ -76,6 +78,14 @@ filetype plugin indent on    " required
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+nmap <F8> :TagbarToggle<CR>
+nmap <F6> :TlistToggle<CR>
+
+map <Leader>e :MBEOpen<cr>
+map <Leader>c :MBEClose<cr>
+map <Leader>t :MBEToggle<cr>
+
 set cindent
 set smartindent
 set expandtab
@@ -139,7 +149,9 @@ let g:gitgutter_eager = 0
 ":colo desert
 ":colo elflord
 ":colo industry
-:colo darkblue
+":colo darkblue
+":colo darkZ
+:colo koehler
 
 :syntax on
 :set hlsearch
