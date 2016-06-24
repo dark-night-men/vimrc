@@ -148,3 +148,6 @@ let g:ycm_show_diagnostics_ui = 0
 ":set tags=.tags;/
 :set grepprg=ack\ --nogroup\ $*
 :set foldmethod=indent
+
+:set cursorline
+:set cursorcolumn
