@@ -27,7 +27,8 @@ Plugin 'tomtom/quickfixsigns_vim'
 "Plugin 'scrooloose/syntastic'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
-Plugin 'szw/vim-ctrlspace'
+set hidden
+Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ciaranm/detectindent'
@@ -150,4 +151,6 @@ let g:ycm_show_diagnostics_ui = 0
 :set foldmethod=indent
 
 :set cursorline
-:set cursorcolumn
+":set cursorcolumn
+
+:set showcmd
