@@ -45,7 +45,8 @@ Plugin 'tomtom/quickfixsigns_vim'
 
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
-Plugin 'szw/vim-ctrlspace'
+set hidden
+Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ciaranm/detectindent'
@@ -158,7 +159,9 @@ let g:gitgutter_eager = 0
 
 :set backspace+=start,eol,indent
 
+:set path=.
 :set complete-=i
+:set complete-=t
 
 if has('cscope')
     set cscopetag cscopeverbose
@@ -180,15 +183,17 @@ if has('cscope')
     :cs add ${CSDIR}/cscope.out
 endif
 
+":set makeprg=~/scripts/g_script_opt.sh\ $*
 :set makeprg=~/scripts/g_script.sh\ $*
-":set makeprg=~/scripts/g_script.csh\ %\
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 set foldmethod=indent
 
 
 if &diff
-    colorscheme slate
+    set lines=999 columns=999
+    colorscheme peachpuff
+    "colorscheme slate
     "colorscheme elflord
     if has("gui_running")
         if has("gui_gtk2")
@@ -213,4 +218,8 @@ runtime ftplugin/man.vim
 "let g:ycm_server_log_level = 'debug'
 
 ":set grepprg=ack\ --nogroup\ $*
-":set foldmethod=indent
+
+:set cursorline
+":set cursorcolumn
+
+:set showcmd
