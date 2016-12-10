@@ -149,6 +149,25 @@ if has('cscope')
         set cscopequickfix=s-,c-,d-,i-,t-,e-
     endif
 
+    "fun! MapCSKeys()
+        nmap cF :cs f f <C-R><C-F><CR>
+        nmap cS :cs f s <C-R><C-W><CR>
+        nmap cI :cs f i <C-R><C-W><CR>
+        nmap cE :cs f e <C-R><C-W><CR>
+        nmap cG :cs f g <C-R><C-W><CR>
+        nmap cD :cs f d <C-R><C-W><CR>
+        nmap cC :cs f c <C-R><C-W><CR>
+        nmap cT :cs f t <C-R><C-W><CR>
+        nmap cWF :vert scs f f <C-R><C-F><CR>
+        nmap cWS :vert scs f s <C-R><C-W><CR>
+        nmap cWI :vert scs f i <C-R><C-W><CR>
+        nmap cWE :vert scs f e <C-R><C-W><CR>
+        nmap cWG :vert scs f g <C-R><C-W><CR>
+        nmap cWD :vert scs f d <C-R><C-W><CR>
+        nmap cWC :vert scs f c <C-R><C-W><CR>
+        nmap cWT :vert scs f t <C-R><C-W><CR>
+    "endfun
+
     cnoreabbrev csa cs add
     cnoreabbrev csf cs find
     cnoreabbrev csk cs kill
@@ -171,7 +190,9 @@ set foldmethod=indent
 
 if &diff
     set lines=999 columns=999
-    colorscheme peachpuff
+
+    colorscheme BlackSea
+    "colorscheme peachpuff
     "colorscheme slate
     "colorscheme elflord
     if has("gui_running")
