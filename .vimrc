@@ -60,10 +60,6 @@ filetype plugin indent on    " required
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 
-"
-set tags=./tags,tags;$HOME
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
@@ -142,9 +138,64 @@ let g:ycm_show_diagnostics_ui = 0
 
 :set backspace+=start,eol,indent
 
+:set path=.
+:set complete-=i
+:set complete-=t
 
-":cs add ./cscope.out
-:cs add ${CSDIR}/cscope.out
+if has('cscope')
+    set cscopetag cscopeverbose
+
+    if has('quickfix')
+        set cscopequickfix=s-,c-,d-,i-,t-,e-
+    endif
+
+    cnoreabbrev csa cs add
+    cnoreabbrev csf cs find
+    cnoreabbrev csk cs kill
+    cnoreabbrev csr cs reset
+    cnoreabbrev css cs show
+    cnoreabbrev csh cs help
+
+    ""command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+
+    ":cs add ./cscope.out
+    :cs add ${CSDIR}/cscope.out
+endif
+
+":set makeprg=~/scripts/g_script_opt.sh\ $*
+:set makeprg=~/scripts/g_script.sh\ $*
+
+:hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
+set foldmethod=indent
+
+
+if &diff
+    set lines=999 columns=999
+    colorscheme peachpuff
+    "colorscheme slate
+    "colorscheme elflord
+    if has("gui_running")
+        if has("gui_gtk2")
+            set guifont=Monospace\ 7
+            ""set guifont=Verdana\ 13
+        elseif has("gui_win32")
+            set guifont=Consolas:h11:cANSI
+        endif
+    endif
+
+endif
+"""""""""""""""""""""""""
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+runtime ftplugin/man.vim
+
+"let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_server_log_level = 'debug'
+
 ":set makeprg=~/scripts/g_script.csh\ %\
 ":set makeprg=~/scripts/makeprg\ %\
 
