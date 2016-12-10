@@ -28,6 +28,8 @@ Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
 set hidden
+let g:airline_exclude_preview = 1
+let g:CtrlSpaceUseTabline = 1
 Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
@@ -59,7 +61,8 @@ filetype plugin indent on    " required
 " " Put your non-Plugin stuff after this line
 
 "
-set tags=./tags,tags
+set tags=./tags,tags;$HOME
+set cscopequickfix=s-,c-,d-,i-,t-,e-
 
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -144,7 +147,9 @@ let g:ycm_show_diagnostics_ui = 0
 :cs add ${CSDIR}/cscope.out
 ":set makeprg=~/scripts/g_script.csh\ %\
 ":set makeprg=~/scripts/makeprg\ %\
+
 :set makeprg=make\ -j8
+":set makeprg=~/scripts/cmakeprg\ %\
 
 ":set tags=.tags;/
 :set grepprg=ack\ --nogroup\ $*
