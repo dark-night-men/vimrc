@@ -152,6 +152,7 @@ let g:gitgutter_eager = 0
 ":colo industry
 ":colo darkblue
 ":colo darkZ
+":Chazing_Logic
 :colo koehler
 
 :syntax on
@@ -192,7 +193,8 @@ set foldmethod=indent
 
 if &diff
     set lines=999 columns=999
-    colorscheme peachpuff
+    colorscheme BlackSea
+    "colorscheme peachpuff
     "colorscheme slate
     "colorscheme elflord
     if has("gui_running")
