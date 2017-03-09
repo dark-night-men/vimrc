@@ -24,7 +24,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-signify'
 Plugin 'tomtom/quickfixsigns_vim'
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
 set hidden
@@ -123,6 +123,14 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
 "let g:ycm_echo_current_diagnostic = 0
 "let g:syntastic_echo_current_error = 0
+"for syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
+
+
 
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
@@ -131,7 +139,8 @@ let g:ycm_show_diagnostics_ui = 0
 ":colo industry
 ":colo darkblue
 ":colo darkZ
-:colo koehler
+":colo koehler
+:colo desert256v2
 
 :syntax on
 :set hlsearch
@@ -182,7 +191,7 @@ if has('cscope')
 endif
 
 ":set makeprg=~/scripts/g_script_opt.sh\ $*
-:set makeprg=~/scripts/g_script.sh\ $*
+":set makeprg=~/scripts/g_script.sh\ $*
 
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 set foldmethod=indent
@@ -220,8 +229,8 @@ runtime ftplugin/man.vim
 ":set makeprg=~/scripts/g_script.csh\ %\
 ":set makeprg=~/scripts/makeprg\ %\
 
-:set makeprg=make\ -j8
-":set makeprg=~/scripts/cmakeprg\ %\
+":set makeprg=make\ -j8
+:set makeprg=~/scripts/cmakeprg\ %\
 
 ":set tags=.tags;/
 :set grepprg=ack\ --nogroup\ $*
@@ -230,4 +239,7 @@ runtime ftplugin/man.vim
 :set cursorline
 ":set cursorcolumn
 
+:command Mc execute "mak  clean| mak"
+
 :set showcmd
+:set history=200
