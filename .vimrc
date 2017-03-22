@@ -243,3 +243,13 @@ runtime ftplugin/man.vim
 
 :set showcmd
 :set history=200
+
+
+"quickfix window autoheight
+au FileType qf call AdjustWindowHeight(3, 10)
+function! AdjustWindowHeight(minheight, maxheight)
+      exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+endfunction
+
+:set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+":set list
