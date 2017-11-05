@@ -42,6 +42,8 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-dispatch'
+"Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE
+"Plugin 'lyuts/vim-rtags'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -187,7 +189,12 @@ if has('cscope')
     ""command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 
     ":cs add ./cscope.out
-    :cs add ${CSDIR}/cscope.out
+    :if filereadable( $CSDIR . "/cscope.out" )
+        :cs add ${CSDIR}/cscope.out
+    :else
+        :echo $CSDIR . "/cscope.out does not exist."
+    :endif
+
 endif
 
 ":set makeprg=~/scripts/g_script_opt.sh\ $*
@@ -229,8 +236,8 @@ runtime ftplugin/man.vim
 ":set makeprg=~/scripts/g_script.csh\ %\
 ":set makeprg=~/scripts/makeprg\ %\
 
-":set makeprg=make\ -j8
-:set makeprg=~/scripts/cmakeprg\ %\
+:set makeprg=make\ -j8
+":set makeprg=~/scripts/cmakeprg\ %\
 
 ":set tags=.tags;/
 :set grepprg=ack\ --nogroup\ $*
@@ -253,3 +260,8 @@ endfunction
 
 :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 ":set list
+"let g:rtagsRcCmd = '/usr/bin/rc'
+set matchpairs+=<:> 
+
+"let g:gitgutter_highlight_lines = 1
+
