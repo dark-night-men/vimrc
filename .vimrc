@@ -43,6 +43,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-dispatch'
 "Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE
+Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE
 "Plugin 'lyuts/vim-rtags'
 
 " All of your Plugins must be added before the following line
@@ -132,9 +133,6 @@ set statusline+=%*
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
 
-
-
-
 :hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 ":colo desert
 ":colo elflord
@@ -191,8 +189,8 @@ if has('cscope')
     ":cs add ./cscope.out
     :if filereadable( $CSDIR . "/cscope.out" )
         :cs add ${CSDIR}/cscope.out
-    :else
-        :echo $CSDIR . "/cscope.out does not exist."
+    ":else
+    "    :echo $CSDIR . "/cscope.out does not exist."
     :endif
 
 endif
@@ -228,6 +226,9 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+"nnoremap ]i :call search('\v\\|.{-}\\|')<CR> "search ident in vim man
+nnoremap ]i :call search('\<\w')<CR>
+
 runtime ftplugin/man.vim
 
 "let g:ycm_server_use_vim_stdout = 1
@@ -236,8 +237,15 @@ runtime ftplugin/man.vim
 ":set makeprg=~/scripts/g_script.csh\ %\
 ":set makeprg=~/scripts/makeprg\ %\
 
-:set makeprg=make\ -j8
-":set makeprg=~/scripts/cmakeprg\ %\
+:if ! empty( split( globpath( '.', '*.pro' ), '\n') ) "checking Qt pro file
+    ":echo "*.pro file found. "
+
+    :set makeprg=make\ -j8
+:else
+    ":echo "*.pro file NOT found. "
+
+    :set makeprg=~/scripts/cmakeprg\ %\
+:endif
 
 ":set tags=.tags;/
 :set grepprg=ack\ --nogroup\ $*
@@ -265,3 +273,8 @@ set matchpairs+=<:>
 
 "let g:gitgutter_highlight_lines = 1
 
+" If { not in the first column
+":map [[ ?{<CR>w99[{
+":map ][ /}<CR>b99]}
+":map ]] j0[[%/{<CR>
+":map [] k$][%?}<CR>
