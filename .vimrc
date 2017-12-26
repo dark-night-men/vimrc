@@ -113,14 +113,14 @@ if has("gui_running")
   endif
 endif
 
-execute pathogen#infect()
+"execute pathogen#infect()
 syntax on
 filetype plugin indent on
 ":filetype plugin on
 
-call pathogen#incubate() 
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+"call pathogen#incubate() 
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
@@ -278,3 +278,5 @@ set matchpairs+=<:>
 ":map ][ /}<CR>b99]}
 ":map ]] j0[[%/{<CR>
 ":map [] k$][%?}<CR>
+
+:set dictionary+=/usr/share/dict/words
