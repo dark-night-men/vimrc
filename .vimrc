@@ -64,6 +64,8 @@ filetype plugin indent on    " required
 " " Put your non-Plugin stuff after this line
 
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+map <F5> :exec("cs f s ".expand("<cword>"))<CR>
+
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F8> :TagbarToggle<CR>
