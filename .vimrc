@@ -13,6 +13,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/gtags.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
@@ -42,9 +43,10 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-dispatch'
-"Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE
-Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE
+Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE ?
 "Plugin 'lyuts/vim-rtags'
+Plugin 'will133/vim-dirdiff'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -62,6 +64,10 @@ filetype plugin indent on    " required
 " "
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
+
+:nmap <F2> :Gtags<SPACE>
+:nmap <F3> :Gtags -f %<CR>
+:nmap <F7> :GtagsCursor<CR>
 
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <F5> :exec("cs f s ".expand("<cword>"))<CR>
@@ -155,6 +161,7 @@ let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
 
 if has('cscope')
     set cscopetag cscopeverbose
+    set csto=0
 
     if has('quickfix')
         set cscopequickfix=s-,c-,d-,i-,t-,e-
@@ -188,12 +195,16 @@ if has('cscope')
 
     ""command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 
-    ":cs add ./cscope.out
-    :if filereadable( $CSDIR . "/cscope.out" )
-        :cs add ${CSDIR}/cscope.out
-    ":else
-    "    :echo $CSDIR . "/cscope.out does not exist."
-    :endif
+    if !empty($CSENABLED)
+
+        :silent exec("! { [[ -e ~/scripts/scope.sh ]] && { pushd $CSDIR; ~/scripts/scope.sh; pushd; } } >>/tmp/vimrc1.log 2>&1 ")
+        :if filereadable( $CSDIR . "/cscope.out" )
+            :cs add ${CSDIR}/cscope.out
+        ":else
+            "    :echo $CSDIR . "/cscope.out does not exist."
+        :endif
+
+    endif
 
 endif
 
@@ -282,3 +293,4 @@ set matchpairs+=<:>
 ":map [] k$][%?}<CR>
 
 :set dictionary+=/usr/share/dict/words
+:ab cgs changes
