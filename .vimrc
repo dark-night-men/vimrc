@@ -23,7 +23,7 @@ Plugin 'mbbill/undotree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'mhinz/vim-signify'
+"Plugin 'mhinz/vim-signify'                 "It looks like gitgutter is better
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'edkolev/tmuxline.vim'
@@ -36,7 +36,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ciaranm/detectindent'
 Plugin 'powerline/powerline'
-Plugin 'klen/python-mode'
+"Plugin 'klen/python-mode'                  "Does not support Vundle
 Plugin 'tpope/vim-sensible'
 Plugin 'Zuckonit/vim-airline-todo'
 Plugin 'tpope/vim-unimpaired'
@@ -121,9 +121,20 @@ if has("gui_running")
   endif
 endif
 
-"execute pathogen#infect()
-syntax on
+" Pathogen load
+filetype off
+
+call pathogen#infect()
+call pathogen#helptags()
+
 filetype plugin indent on
+syntax on
+
+
+"to remove 
+"execute pathogen#infect()
+"syntax on
+"filetype plugin indent on
 ":filetype plugin on
 
 "call pathogen#incubate() 
@@ -293,4 +304,30 @@ set matchpairs+=<:>
 ":map [] k$][%?}<CR>
 
 :set dictionary+=/usr/share/dict/words
-:ab cgs changes
+:set dictionary+=~/tmp/dictru
+
+:command Cgs execute "changes"
+
+:command Pas execute "set paste"
+:command Nps execute "set nopaste"
+
+
+if !empty($NOVELENABLED)
+    :set wrap
+    :set linebreak
+    :set nolist  " list disables linebreak
+    :set scrolloff=5
+
+    if filereadable( expand( "~/scripts/vimtips/ab" ) )
+        so ~/scripts/vimtips/ab
+    endif
+
+    "setlocal spell spelllang=en_us,ru_ru
+    setlocal spell spelllang=ru_yo,en_us "ёж вместо еж"
+
+
+    set keymap=russian-jcukenwin
+    set iminsert=0
+    set imsearch=0
+    highlight lCursor guifg=NONE guibg=Cyan
+endif
