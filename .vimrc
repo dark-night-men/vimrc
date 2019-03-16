@@ -46,6 +46,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE ?
 "Plugin 'lyuts/vim-rtags'
 Plugin 'will133/vim-dirdiff'
+Plugin 'jiangmiao/auto-pairs' "match pairs
 
 
 " All of your Plugins must be added before the following line
@@ -72,7 +73,7 @@ filetype plugin indent on    " required
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <F5> :exec("cs f s ".expand("<cword>"))<CR>
 
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F6> :TlistToggle<CR>
@@ -144,6 +145,8 @@ syntax on
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
 "let g:ycm_echo_current_diagnostic = 0
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
 "let g:syntastic_echo_current_error = 0
 "for syntastic
 set statusline+=%#warningmsg#
@@ -329,5 +332,6 @@ if !empty($NOVELENABLED)
     set keymap=russian-jcukenwin
     set iminsert=0
     set imsearch=0
+    highlight Cursor guifg=NONE guibg=Green
     highlight lCursor guifg=NONE guibg=Cyan
 endif
