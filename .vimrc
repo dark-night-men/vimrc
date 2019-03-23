@@ -264,7 +264,7 @@ runtime ftplugin/man.vim
 ":set makeprg=~/scripts/g_script.csh\ %\
 ":set makeprg=~/scripts/makeprg\ %\
 
-:if ! empty( split( globpath( '.', '*.pro' ), '\n') ) "checking Qt pro file
+:if !empty($DEV8ELENABLED) || !empty( split( globpath( '.', '*.pro' ), '\n') ) "checking pure Makefile or  Qt pro file
     ":echo "*.pro file found. "
 
     :set makeprg=make\ -j8
@@ -335,3 +335,6 @@ if !empty($NOVELENABLED)
     highlight Cursor guifg=NONE guibg=Green
     highlight lCursor guifg=NONE guibg=Cyan
 endif
+
+"do not expand tab in Makefiles
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
