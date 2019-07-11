@@ -16,9 +16,9 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/gtags.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
+"Plugin 'bling/vim-bufferline'
 Plugin 'Shougo/unite.vim'
-Plugin 'weynhamz/vim-plugin-minibufexpl'
+"Plugin 'weynhamz/vim-plugin-minibufexpl'
 Plugin 'mbbill/undotree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
@@ -66,9 +66,9 @@ filetype plugin indent on    " required
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 
-:nmap <F2> :Gtags<SPACE>
-:nmap <F3> :Gtags -f %<CR>
-:nmap <F7> :GtagsCursor<CR>
+nmap <F2> :Gtags<SPACE>
+nmap <F3> :Gtags -f %<CR>
+nmap <F7> :GtagsCursor<CR>
 
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <F5> :exec("cs f s ".expand("<cword>"))<CR>
@@ -136,7 +136,7 @@ syntax on
 "execute pathogen#infect()
 "syntax on
 "filetype plugin indent on
-":filetype plugin on
+"filetype plugin on
 
 "call pathogen#incubate() 
 "call pathogen#runtime_append_all_bundles()
@@ -155,23 +155,23 @@ set statusline+=%*
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
 
-:hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
-":colo desert
-":colo elflord
-":colo industry
-":colo darkblue
-":colo darkZ
-":colo koehler
-:colo desert256v2
+hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
+"colo desert
+"colo elflord
+"colo industry
+"colo darkblue
+"colo darkZ
+"colo koehler
+colo desert256v2
 
-:syntax on
-:set hlsearch
+syntax on
+set hlsearch
 
-:set backspace+=start,eol,indent
+set backspace+=start,eol,indent
 
-:set path=.
-:set complete-=i
-:set complete-=t
+set path=.
+set complete-=i
+set complete-=t
 
 if has('cscope')
     set cscopetag cscopeverbose
@@ -222,10 +222,10 @@ if has('cscope')
 
 endif
 
-":set makeprg=~/scripts/g_script_opt.sh\ $*
-":set makeprg=~/scripts/g_script.sh\ $*
+"set makeprg=~/scripts/g_script_opt.sh\ $*
+"set makeprg=~/scripts/g_script.sh\ $*
 
-:hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
+hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 set foldmethod=indent
 
 
@@ -261,30 +261,30 @@ runtime ftplugin/man.vim
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_server_log_level = 'debug'
 
-":set makeprg=~/scripts/g_script.csh\ %\
-":set makeprg=~/scripts/makeprg\ %\
+"set makeprg=~/scripts/g_script.csh\ %\
+"set makeprg=~/scripts/makeprg\ %\
 
-:if !empty($DEV8ELENABLED) || !empty( split( globpath( '.', '*.pro' ), '\n') ) "checking pure Makefile or  Qt pro file
+if !empty($DEV8ELENABLED) || !empty( split( globpath( '.', '*.pro' ), '\n') ) "checking pure Makefile or  Qt pro file
     ":echo "*.pro file found. "
 
     :set makeprg=make\ -j8
-:else
+else
     ":echo "*.pro file NOT found. "
 
     :set makeprg=~/scripts/cmakeprg\ %\
-:endif
+endif
 
-":set tags=.tags;/
-:set grepprg=ack\ --nogroup\ $*
-:set foldmethod=indent
+"set tags=.tags;/
+set grepprg=ack\ --nogroup\ $*
+set foldmethod=indent
 
-:set cursorline
-":set cursorcolumn
+set cursorline
+"set cursorcolumn
 
-:command Mc execute "mak  clean| mak"
+command Mc execute "mak  clean| mak"
 
-:set showcmd
-:set history=200
+set showcmd
+set history=200
 
 
 "quickfix window autoheight
@@ -293,40 +293,41 @@ function! AdjustWindowHeight(minheight, maxheight)
       exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
-:set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-":set list
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+"set list
 "let g:rtagsRcCmd = '/usr/bin/rc'
 set matchpairs+=<:> 
 
 "let g:gitgutter_highlight_lines = 1
 
-" If { not in the first column
-":map [[ ?{<CR>w99[{
-":map ][ /}<CR>b99]}
-":map ]] j0[[%/{<CR>
-":map [] k$][%?}<CR>
+" If { not in the first column "check :h [[
+"map [[ ?{<CR>w99[{
+"map ][ /}<CR>b99]}
+"map ]] j0[[%/{<CR>
+"map [] k$][%?}<CR>
 
-:set dictionary+=/usr/share/dict/words
-:set dictionary+=~/tmp/dictru
+set dictionary+=/usr/share/dict/words
+set dictionary+=~/tmp/dictru
 
-:command Cgs execute "changes"
+command Cgs execute "changes"
 
-:command Pas execute "set paste"
-:command Nps execute "set nopaste"
+command Pas execute "set paste"
+command Nps execute "set nopaste"
 
 
 if !empty($NOVELENABLED)
-    :set wrap
-    :set linebreak
-    :set nolist  " list disables linebreak
-    :set scrolloff=5
+    set wrap
+    set linebreak
+    set nolist  " list disables linebreak
+    set scrolloff=1
 
-    if filereadable( expand( "~/scripts/vimtips/ab" ) )
+    set ignorecase  "for autocompletion 
+    set infercase   "for autocompletion 
+
+if filereadable( expand( "~/scripts/vimtips/ab" ) )
         so ~/scripts/vimtips/ab
-    endif
+endif
 
-    "setlocal spell spelllang=en_us,ru_ru
-    setlocal spell spelllang=ru_yo,en_us "ёж вместо еж"
 
 
     set keymap=russian-jcukenwin
@@ -336,5 +337,10 @@ if !empty($NOVELENABLED)
     highlight lCursor guifg=NONE guibg=Cyan
 endif
 
+setlocal spelllang=ru_yo,en_us "ёж вместо еж"
+
+command SP setlocal spell
+command NSP setlocal nospell
+
 "do not expand tab in Makefiles
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+"autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
