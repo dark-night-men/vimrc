@@ -463,3 +463,7 @@ set tags=tags
 if has('cscope') && !empty($CSENABLED)
     silent cs f g main
 endif
+
+"read pdf xpdf must be installed
+":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
+:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
