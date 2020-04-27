@@ -2,6 +2,15 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+set encoding=utf-8          "ctrlspace recommend
+set showtabline=0           "ctrlspace recommend
+if executable("ag")
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
+"hi link CtrlSpaceSearch IncSearch
+"hi CtrlSpaceSearch guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -17,9 +26,9 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/gtags.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
-"Plugin 'bling/vim-bufferline'
+Plugin 'bling/vim-bufferline'
 Plugin 'Shougo/unite.vim'
-"Plugin 'weynhamz/vim-plugin-minibufexpl'
+Plugin 'weynhamz/vim-plugin-minibufexpl'
 Plugin 'mbbill/undotree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
@@ -45,13 +54,15 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE ?
-"Plugin 'lyuts/vim-rtags'
+Plugin 'lyuts/vim-rtags'
 Plugin 'will133/vim-dirdiff'
 Plugin 'jiangmiao/auto-pairs' "match pairs
 Plugin 'arrufat/vala.vim'
-Plugin 'udalov/kotlin-vim'
-Plugin 'vim-scripts/ClassTree'
+"Plugin 'udalov/kotlin-vim'
+"Plugin 'vim-scripts/ClassTree'
 "Plugin 'jeaye/color_coded' "needs Python3
+"Plugin 'vim/runtime/plugin/spellfile.vim'
+
 
 "Plugin 'dkprice/vim-easygrep'
 "EasyGrep options
@@ -110,10 +121,10 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
+"Plug 'junegunn/vim-easy-align'
 
 " Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Multiple Plug commands can be written in a single line using | separators
 "Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'            "needs Python3?"
@@ -123,18 +134,18 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 "Plug 'tpope/vim-fireplace', { 'for': 'clojure' }		"dont need
 
 " Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
+"sign"Plug 'fatih/vim-go', { 'tag': '*' }
 
 " Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
-Plug 'junegunn/fzf.vim'
+"Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
+"Plug 'junegunn/fzf.vim'
 
 " Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
@@ -250,7 +261,9 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo darkblue
 "colo darkZ
 "colo koehler
-colo desert256v2
+
+"colo desert256v2 "doesn't show git signs
+colo desert256
 
 syntax on
 set hlsearch
@@ -448,6 +461,7 @@ endif
 endif
 
 setlocal spelllang=ru_yo,en_us "ёж вместо еж"
+set spellfile=~/.vim/spell/ru.utf-8.add
 
 command SP setlocal spell
 command NSP setlocal nospell
