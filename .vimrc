@@ -1,3 +1,6 @@
+"TODO Add PLugin lh-cpp
+"
+
 "Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -21,47 +24,99 @@ call vundle#begin()
 " " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'jlanzarotta/bufexplorer'
+
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/gtags.vim'
+"Plugin 'vim-scripts/ClassTree'
+Plugin 'vim-scripts/autoproto.vim'         
+"Plugin 'vim-scripts/let-modeline.vim'
+Plugin 'vim-scripts/valgrind.vim'
+"Plugin 'vim-scripts/calendar.vim--Matsumoto'
+
 Plugin 'Valloric/YouCompleteMe'
+
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
+
+Plugin 'Zuckonit/vim-airline-todo'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'asenac/vim-airline-loclist'
+
 Plugin 'Shougo/unite.vim'
 Plugin 'weynhamz/vim-plugin-minibufexpl'
 Plugin 'mbbill/undotree'
+
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+
 Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'mhinz/vim-signify'                 "It looks like gitgutter is better
+
 Plugin 'tomtom/quickfixsigns_vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'tomtom/tlib_vim'
+
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
+
 set hidden
 let g:airline_exclude_preview = 1
 let g:CtrlSpaceUseTabline = 1
+
 Plugin 'vim-ctrlspace/vim-ctrlspace'
+
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE ?
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-abolish'
+
 Plugin 'kien/ctrlp.vim'
 Plugin 'ciaranm/detectindent'
 Plugin 'powerline/powerline'
 "Plugin 'klen/python-mode'                  "Does not support Vundle
-Plugin 'tpope/vim-sensible'
-Plugin 'Zuckonit/vim-airline-todo'
-Plugin 'tpope/vim-unimpaired'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE ?
 Plugin 'lyuts/vim-rtags'
 Plugin 'will133/vim-dirdiff'
 Plugin 'jiangmiao/auto-pairs' "match pairs
 Plugin 'arrufat/vala.vim'
 "Plugin 'udalov/kotlin-vim'
-"Plugin 'vim-scripts/ClassTree'
 "Plugin 'jeaye/color_coded' "needs Python3
 "Plugin 'vim/runtime/plugin/spellfile.vim'
+
+
+"Plugin 'kana/vim-textobj-user'
+"Plugin 'kana/vim-textobj-function'
+"Plugin 'kana/vim-textobj-line'
+"Plugin 'gioele/vim-autoswap'
+
+"Plugin 'gergap/vim-konsole'
+"Plugin 'gergap/vim-latexview'
+"Plugin 'gergap/gergap'
+"Plugin 'gergap/ShowMarks'
+"Plugin 'gergap/refactor'
+
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'altercation/vim-colors-solarized'
+
+"Plugin 'godlygeek/tabular'
+"Plugin 'Townk/vim-autoclose'
+Plugin 'vimwiki/vimwiki'
+"Plugin 'tenfyzhong/CompleteParameter.vim'
+"Plugin 'rust-lang/rust.vim'
+"Plugin 'vim-syntastic/syntastic'
+"Plugin 'rhysd/vim-grammarous'
+"Plugin 'christoomey/vim-tmux-navigator'
+"Plugin 'SidOfc/mkdx'
+"Plugin 'dhruvasagar/vim-table-mode'
+
+Plugin 'dense-analysis/ale'
 
 
 "Plugin 'dkprice/vim-easygrep'
@@ -87,17 +142,28 @@ Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger="<a-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 "Plugin UltiSnip end
 
-"vim-addon-manager needed
-"ActivateAddons lh-cpp vim-snippets
-"
+"Plugin vim-snipmate begin
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'garbas/vim-snipmate'
+"Plugin vim-snipmate end
+"Plugin 'snipMate.vim'         
+
+"""Plugin 'vim/matchit.vim' "runtime/pack/dist/opt/matchit/plugin/matchit.vim "buggy ?
+"""Plugin 'jpalardy/slime.vim'  "buggy"
+
+Plugin 'ervandew/supertab'         
+"Plugin 'vimballPlugin.vim'    
+Plugin 'zencoding.vim'        
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -116,6 +182,18 @@ filetype plugin indent on    " required
 " " Put your non-Plugin stuff after this line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:airline_powerline_fonts = 1 "Powerline fonts on
+let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Cursor coords in status bar
+let g:Powerline_symbols='unicode' "unicode support
+"let g:airline#extensions#xkblayout#enabled = 0
+
+
+":imap <C-J> <Plug>snipMateNextOrTrigger
+":smap <C-J> <Plug>snipMateNextOrTrigger
+
+:imap <F7> <Plug>snipMateNextOrTrigger
+:smap <F7> <Plug>snipMateNextOrTrigger
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -125,17 +203,13 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-"Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
+Plug 'ryanoasis/vim-devicons'
+Plug 'ErichDonGubler/vim-sublime-monokai'
 
 " Any valid git URL is allowed
 "Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
-" Multiple Plug commands can be written in a single line using | separators
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'            "needs Python3?"
-
-" On-demand loading
-"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } 	"already in Vundle
-"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }		"dont need
 
 " Using a non-master branch
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
@@ -265,9 +339,13 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo darkblue
 "colo darkZ
 "colo koehler
+"colo sublimemonokai
 
 "colo desert256v2 "doesn't show git signs
-colo desert256
+"colo desert256
+
+"colo seoul256
+colo Chasing_Logic
 
 syntax on
 set hlsearch
