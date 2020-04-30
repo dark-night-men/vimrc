@@ -163,6 +163,7 @@ Plugin 'ervandew/supertab'
 "Plugin 'vimballPlugin.vim'    
 Plugin 'zencoding.vim'        
 
+"Plugin 'itchyny/lightline.vim'         "can replace airline
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -207,6 +208,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'rbong/vim-flog'           "addon to fugitive"
+Plug 'mhinz/vim-startify'       "vim startscreen"
 
 " Any valid git URL is allowed
 "Plug 'https://github.com/junegunn/vim-github-dashboard.git'
