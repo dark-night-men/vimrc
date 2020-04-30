@@ -206,6 +206,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ErichDonGubler/vim-sublime-monokai'
+Plug 'rbong/vim-flog'           "addon to fugitive"
 
 " Any valid git URL is allowed
 "Plug 'https://github.com/junegunn/vim-github-dashboard.git'
