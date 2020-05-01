@@ -23,7 +23,7 @@ call vundle#begin()
 "
 " " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'jlanzarotta/bufexplorer'
+"Plugin 'jlanzarotta/bufexplorer'
 
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/a.vim'
@@ -44,7 +44,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'asenac/vim-airline-loclist'
 
 Plugin 'Shougo/unite.vim'
-Plugin 'weynhamz/vim-plugin-minibufexpl'
+"Plugin 'weynhamz/vim-plugin-minibufexpl'
 Plugin 'mbbill/undotree'
 
 Plugin 'scrooloose/nerdtree'
@@ -224,9 +224,9 @@ Plug 'mhinz/vim-startify'       "vim startscreen"
 "Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
-"Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
@@ -302,25 +302,9 @@ if has("gui_running")
   endif
 endif
 
-" Pathogen load
 filetype off
-
-call pathogen#infect()
-call pathogen#helptags()
-
 filetype plugin indent on
 syntax on
-
-
-"to remove 
-"execute pathogen#infect()
-"syntax on
-"filetype plugin indent on
-"filetype plugin on
-
-"call pathogen#incubate() 
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0
