@@ -1,5 +1,8 @@
-"TODO Add PLugin lh-cpp
+"TODO Add Plugin lh-cpp
 "
+
+set laststatus=2
+set statusline+=%F
 
 "Vundle
 set nocompatible              " be iMproved, required
@@ -116,8 +119,11 @@ Plugin 'vimwiki/vimwiki'
 "Plugin 'SidOfc/mkdx'
 "Plugin 'dhruvasagar/vim-table-mode'
 
-Plugin 'dense-analysis/ale'
-
+if empty($ALEDISABLED)
+    Plugin 'dense-analysis/ale'
+    nmap <silent> <leader>aj :ALENext<cr>
+    nmap <silent> <leader>ak :ALEPrevious<cr>
+endif
 
 "Plugin 'dkprice/vim-easygrep'
 "EasyGrep options
@@ -165,6 +171,9 @@ Plugin 'zencoding.vim'
 
 "Plugin 'itchyny/lightline.vim'         "can replace airline
 
+Plugin 'justinmk/vim-syntax-extra'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -181,6 +190,7 @@ filetype plugin indent on    " required
 " "
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
+" " Vundle end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1 "Powerline fonts on
@@ -227,6 +237,10 @@ Plug 'mhinz/vim-startify'       "vim startscreen"
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
+Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
+nnoremap <Leader>q :Quickfix<CR>
+nnoremap <Leader>l :Quickfix!<CR>
 
 " Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
@@ -331,8 +345,16 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo desert256v2 "doesn't show git signs
 "colo desert256
 
+"colo summerfruit256
+"colo devbox-dark-256
+"colo lizard256
+"colo twilight256
+"colo lapis256
+"colo oceanblack256.vim
+colo tigrana-256-dark
 "colo seoul256
-colo Chasing_Logic
+"colo calmar256-dark
+"colo Chasing_Logic
 
 syntax on
 set hlsearch
@@ -550,3 +572,6 @@ endif
 "read pdf xpdf must be installed
 ":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+
+"let g:ale_linters = {}
+"let b:ale_linters = {'javascript': ['eslint']}
