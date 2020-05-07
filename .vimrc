@@ -172,7 +172,7 @@ Plugin 'zencoding.vim'
 "Plugin 'itchyny/lightline.vim'         "can replace airline
 
 Plugin 'justinmk/vim-syntax-extra'
-
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
