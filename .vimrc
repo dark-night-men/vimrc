@@ -40,6 +40,8 @@ Plugin 'vim-scripts/valgrind.vim'
 Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'bling/vim-airline'
+let g:airline#extensions#tabline#enabled = 1
+
 Plugin 'bling/vim-bufferline'
 
 Plugin 'Zuckonit/vim-airline-todo'
