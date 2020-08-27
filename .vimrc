@@ -76,7 +76,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround' "DOES NOT SUPPORT VUNDLE ?
-Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-commentary'               "gc gcc gcu
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
@@ -244,6 +244,8 @@ Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
 nnoremap <Leader>q :Quickfix<CR>
 nnoremap <Leader>l :Quickfix!<CR>
 
+Plug 'nblock/vim-dokuwiki'
+
 " Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
 
@@ -344,7 +346,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo koehler
 "colo sublimemonokai
 
-"colo desert256v2 "doesn't show git signs
+"colo desert256v2 "doesn't show git signs ?
 "colo desert256
 
 "colo summerfruit256
@@ -353,10 +355,32 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo twilight256
 "colo lapis256
 "colo oceanblack256.vim
-colo tigrana-256-dark
+"colo tigrana-256-dark
 "colo seoul256
-"colo calmar256-dark
+
 "colo Chasing_Logic
+"-----------------------
+"colo colozone
+"colo PapayaWhip
+"colo PaperColor
+"colo sole
+"colo lingodirector
+"colo wikipedia
+"colo bluish
+"colo miko
+"colo softbluev2
+"colo Tomorrow
+"colo Tomorrow-Night-Blue
+"colo VIvid
+
+"colo calmar256-dark
+"colo desert256v2 
+"colo darkblue2
+ 
+colo tabula
+
+"get colorscheme name"
+"echo g:colors_name
 
 syntax on
 set hlsearch
