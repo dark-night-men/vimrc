@@ -245,6 +245,7 @@ nnoremap <Leader>q :Quickfix<CR>
 nnoremap <Leader>l :Quickfix!<CR>
 
 Plug 'nblock/vim-dokuwiki'
+let dokuwiki_comment=1
 
 " Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
