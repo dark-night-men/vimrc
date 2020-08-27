@@ -555,9 +555,7 @@ command Cgs execute "changes"
 command Pas execute "set paste"
 command Nps execute "set nopaste"
 
-function SetKeymapRu()
-    set keymap=russian-jcukenwin
-endfunction
+set keymap=russian-jcukenwin
 
 if !empty($NOVELENABLED)
     set wrap
@@ -574,7 +572,7 @@ endif
 
 
 
-    set keymap=russian-jcukenwin
+    "set keymap=russian-jcukenwin
     set iminsert=0
     set imsearch=0
     highlight Cursor guifg=NONE guibg=Green
