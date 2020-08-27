@@ -555,6 +555,9 @@ command Cgs execute "changes"
 command Pas execute "set paste"
 command Nps execute "set nopaste"
 
+function SetKeymapRu()
+    set keymap=russian-jcukenwin
+endfunction
 
 if !empty($NOVELENABLED)
     set wrap
