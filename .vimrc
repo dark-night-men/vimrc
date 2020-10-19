@@ -379,6 +379,13 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo darkblue2
  
 colo tabula
+"colo cake
+
+"test
+"colo reloaded
+"colo lilydjwg_dark
+"colo tatami
+
 
 "get colorscheme name"
 "echo g:colors_name
@@ -603,3 +610,6 @@ endif
 
 "let g:ale_linters = {}
 "let b:ale_linters = {'javascript': ['eslint']}
+
+"set autochdir
+autocmd BufEnter * silent! lcd %:p:h
