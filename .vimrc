@@ -80,6 +80,7 @@ Plugin 'tpope/vim-commentary'               "gc gcc gcu
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-scriptease'
 
 Plugin 'kien/ctrlp.vim'
 Plugin 'ciaranm/detectindent'
