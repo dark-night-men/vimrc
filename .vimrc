@@ -369,7 +369,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo lingodirector
 "colo wikipedia
 "colo bluish
-"colo miko
+"colo miko                      "dark "
 "colo softbluev2
 "colo Tomorrow
 "colo Tomorrow-Night-Blue
@@ -379,8 +379,42 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo desert256v2 
 "colo darkblue2
  
-colo tabula
-"colo cake
+"colo tabula 201031
+"colo candy             "dark"
+"colo BlackSea
+
+colo cake              "light +
+"colo made_of_code      "dark
+"colo materialbox       "dark
+"colo mayansmoke        "light
+"colo messy             "light
+"colo moss              "dark
+"colo monokai-phoenix   "dark +
+"colo moonshine_minimal "dark
+"colo murphy            "dark"
+"colo mushroom          "very dark"
+"colo adventurous       "dark"
+"colo alduin            "dark"
+"colo antares           "dark"
+"colo apprentice        "dark"
+"colo archery           "dark"
+"colo asmanian2         "dark"
+"colo aurora            "light"
+"colo autumn            "light
+"colo autumnleaf        "light contrast +
+"colo badwolf           "dark warm +
+"colo baycomb           "dark"
+"colo beauty256         "light"
+"colo beekai            "dark"
+"colo bensday           "dark, light back
+"colo birds-of-paradise "dark, warmred"
+"colo black_angus       "dark, green
+"colo blazer            "dark, warm
+"colo borland           "dark, blue back 
+"colo bubblegum-256-light   "light"
+"colo busybee               "dark"
+"colo burnttoast256         "dark"
+
 
 "test
 "colo reloaded
@@ -601,9 +635,9 @@ set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 "set tags=./tags,tags
 set tags=tags
 
-if has('cscope') && !empty($CSENABLED)
-    silent cs f g main
-endif
+"if has('cscope') && !empty($CSENABLED)
+"    silent cs f g main
+"endif
 
 "read pdf xpdf must be installed
 ":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
@@ -614,3 +648,6 @@ endif
 
 "set autochdir
 autocmd BufEnter * silent! lcd %:p:h
+
+command AN execute "ALENextWrap"
+command AP execute "ALEPreviousWrap"
