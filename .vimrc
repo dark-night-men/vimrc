@@ -380,16 +380,16 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo darkblue2
  
 "colo tabula 201031
-"colo candy             "dark"
+colo candy             "dark ++"
 "colo BlackSea
 
-colo cake              "light +
+"colo cake              "light +
 "colo made_of_code      "dark
 "colo materialbox       "dark
 "colo mayansmoke        "light
 "colo messy             "light
 "colo moss              "dark
-"colo monokai-phoenix   "dark +
+"colo monokai-phoenix   "dark c
 "colo moonshine_minimal "dark
 "colo murphy            "dark"
 "colo mushroom          "very dark"
@@ -403,7 +403,7 @@ colo cake              "light +
 "colo autumn            "light
 "colo autumnleaf        "light contrast +
 "colo badwolf           "dark warm +
-"colo baycomb           "dark"
+"colo baycomb           "dark|light?"
 "colo beauty256         "light"
 "colo beekai            "dark"
 "colo bensday           "dark, light back
@@ -414,6 +414,7 @@ colo cake              "light +
 "colo bubblegum-256-light   "light"
 "colo busybee               "dark"
 "colo burnttoast256         "dark"
+"colo wikipedia             "light"
 
 
 "test
@@ -597,7 +598,19 @@ command Cgs execute "changes"
 command Pas execute "set paste"
 command Nps execute "set nopaste"
 
-set keymap=russian-jcukenwin
+nnoremap <leader>km :call KeymapToggle()<cr>
+function! KeymapToggle()
+
+    if &keymap !=""
+
+        setlocal keymap=""
+    else
+
+        setlocal keymap=russian-jcukenwin
+        "set keymap=russian-jcukenwin
+    endif
+endfunction
+
 
 if !empty($NOVELENABLED)
     set wrap
