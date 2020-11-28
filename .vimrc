@@ -415,6 +415,7 @@ colo candy             "dark ++"
 "colo busybee               "dark"
 "colo burnttoast256         "dark"
 "colo wikipedia             "light"
+"colo automation            "dark"
 
 
 "test
@@ -517,7 +518,8 @@ set foldmethod=indent
 if &diff
     set lines=999 columns=999
 
-    colorscheme BlackSea
+    colorscheme doriath
+    "colorscheme BlackSea
     "colorscheme peachpuff
     "colorscheme slate
     "colorscheme elflord
@@ -599,6 +601,7 @@ command Pas execute "set paste"
 command Nps execute "set nopaste"
 
 nnoremap <leader>km :call KeymapToggle()<cr>
+command KM :call KeymapToggle()
 function! KeymapToggle()
 
     if &keymap !=""
@@ -664,3 +667,5 @@ autocmd BufEnter * silent! lcd %:p:h
 
 command AN execute "ALENextWrap"
 command AP execute "ALEPreviousWrap"
+
+command DM execute "redir! > /tmp/vim_maps.txt| silent map| silent map! |  redir END| edit /tmp/vim_maps.txt"
