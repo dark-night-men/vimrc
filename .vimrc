@@ -1,6 +1,9 @@
 "TODO Add Plugin lh-cpp
 "
 
+" set verbose=15
+" set verbosefile=/tmp/vimverbose.log
+
 set laststatus=2
 set statusline+=%F
 
@@ -57,10 +60,11 @@ Plugin 'scrooloose/syntastic'
 
 Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
-"Plugin 'mhinz/vim-signify'                 "It looks like gitgutter is better
+"Plugin 'mhinz/vim-signify'                 "It looks like gitgutter is better. Bugs in mapping?
 
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'tomtom/tlib_vim'
+"Plugin 'tomtom/tcomment_vim'
 
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'gcmt/taboo.vim'
@@ -157,6 +161,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+set runtimepath+=~/.vim/zerg_snippets/
 "Plugin UltiSnip end
 
 "Plugin vim-snipmate begin
@@ -164,6 +170,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 "Plugin vim-snipmate end
 "Plugin 'snipMate.vim'         
+let g:snipMate = { 'snippet_version' : 1 }
 
 """Plugin 'vim/matchit.vim' "runtime/pack/dist/opt/matchit/plugin/matchit.vim "buggy ?
 """Plugin 'jpalardy/slime.vim'  "buggy"
@@ -176,6 +183,21 @@ Plugin 'zencoding.vim'
 
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'preservim/nerdcommenter'                "\cc \cn "
+
+Plugin 'mattn/emmet-vim'                "for html?"
+
+Plugin 'stefandtw/quickfix-reflector.vim'
+"quickfix-reflector options
+let g:qf_modifiable = 1
+let g:qf_join_changes = 1
+let g:qf_write_changes = 1
+"quickfix-reflector options END
+
+Plugin 'tweekmonster/braceless.vim'
+autocmd FileType python BracelessEnable +indent "braceless option"
+
+Plugin 'fedorenchik/qt-support.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -222,6 +244,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'rbong/vim-flog'           "addon to fugitive"
 Plug 'mhinz/vim-startify'       "vim startscreen"
+Plug 'mhinz/vim-rfc'
 
 " Any valid git URL is allowed
 "Plug 'https://github.com/junegunn/vim-github-dashboard.git'
@@ -237,23 +260,113 @@ Plug 'mhinz/vim-startify'       "vim startscreen"
 "Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
+
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
-Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
+"Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}     "do not exists any more"
+
 nnoremap <Leader>q :Quickfix<CR>
 nnoremap <Leader>l :Quickfix!<CR>
 
 Plug 'nblock/vim-dokuwiki'
 let dokuwiki_comment=1
 
+Plug 'liuchengxu/vim-which-key'
+
+" On-demand lazy load
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
+"if has('nvim')
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+"let g:deoplete#enable_at_startup = 1
+
+" To register the descriptions when using the on-demand load feature,
+" use the autocmd hook to call which_key#register(), e.g., register for the Space key:
+" autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')
+
 " Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
+
+
+Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download()  }  }
+
+Plug 'liuchengxu/vista.vim'
+"vista.vim options
+function! NearestMethodOrFunction() abort
+    return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+set statusline+=%{NearestMethodOrFunction()}
+
+" By default vista.vim never run if you don't call it explicitly.
+" "
+" " If you want to show the nearest function in your statusline
+" automatically,
+" " you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction() 
+"vista.vim options END
+
+Plug 'cpiger/NeoDebug'
+
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
+"It requires asyncrun.vim 2.4.0 or above. Don't forget to setup:
+
+let g:asyncrun_open = 6
+"And quickfix window can be opened automatically, otherwise you can't see the task output unless using :copen manually.
+
+"Build and run a single file
+"It's convenient for me to build and run a single file directly without creating a new project for that if I want to try some small and new ideas. In this circumstance, we can use :AsyncTaskEdit command to edit the .tasks configuration file in your current project root directory:
+"
+"[file-build]
+"# macros in the "$(...)" form will be substituted, 
+"# # shell command, use quotation for filenames containing spaces
+"# command=gcc -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)"
+"# # working directory
+"# cwd=$(VIM_FILEDIR)
+"#
+"# [file-run]
+"# command="$(VIM_FILEDIR)/$(VIM_FILENOEXT)"
+"# cwd=$(VIM_FILEDIR)
+"# # output mode: run in a terminal
+"# output=terminal
+"# There are two tasks file-build and file-run defined in this .tasks file.
+"# Then from the directory where this .tasks reside and its child directories,
+"# you can use:
+"#
+"# :AsyncTask file-build
+"# :AsyncTask file-run
+"#
+
 
 " Initialize plugin system
 call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"vim-modern-cpp options
+"Disable function highlighting (affects both C and C++ files)
+let g:cpp_function_highlight = 0
+
+" Enable highlighting of C++11 attributes
+let g:cpp_attributes_highlight = 1
+
+" Highlight struct/class member variables (affects both C and C++ files)
+let g:cpp_member_highlight = 1
+
+" Put all standard C and C++ keywords under Vim's highlight group 'Statement'
+" (affects both C and C++ files)
+let g:cpp_simple_highlight = 1
+"vim-modern-cpp options END
+
 
 "nmap <F2> :Gtags<SPACE>
 "nmap <F3> :Gtags -f %<CR>
@@ -274,7 +387,7 @@ map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 map <F5> :exec("cs f s ".expand("<cword>"))<CR>
 
 "map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+"map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F6> :TlistToggle<CR>
 
@@ -380,25 +493,28 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo darkblue2
  
 "colo tabula 201031
-colo candy             "dark ++"
+
+"colo candy             "dark ++"
+"colo made_of_code      "dark +
+
 "colo BlackSea
 
 "colo cake              "light +
-"colo made_of_code      "dark
+
 "colo materialbox       "dark
 "colo mayansmoke        "light
 "colo messy             "light
 "colo moss              "dark
 "colo monokai-phoenix   "dark c
 "colo moonshine_minimal "dark
-"colo murphy            "dark"
+"colo murphy            "dark +"
 "colo mushroom          "very dark"
 "colo adventurous       "dark"
 "colo alduin            "dark"
 "colo antares           "dark"
 "colo apprentice        "dark"
 "colo archery           "dark"
-"colo asmanian2         "dark"
+colo asmanian2         "dark, light back, wrecked?"
 "colo aurora            "light"
 "colo autumn            "light
 "colo autumnleaf        "light contrast +
@@ -413,10 +529,11 @@ colo candy             "dark ++"
 "colo borland           "dark, blue back 
 "colo bubblegum-256-light   "light"
 "colo busybee               "dark"
-"colo burnttoast256         "dark"
+"colo burnttoast256         "dark +"
 "colo wikipedia             "light"
 "colo automation            "dark"
-
+"colo gentooish             "dark"
+"colo railscasts            "dark"
 
 "test
 "colo reloaded
@@ -518,11 +635,14 @@ set foldmethod=indent
 if &diff
     set lines=999 columns=999
 
-    colorscheme doriath
+    colorscheme oceanblack256
+    "colorscheme doriath
     "colorscheme BlackSea
     "colorscheme peachpuff
     "colorscheme slate
     "colorscheme elflord
+    "
+    "sublimemonokai
     if has("gui_running")
         if has("gui_gtk2")
             set guifont=Monospace\ 7
@@ -551,17 +671,28 @@ runtime ftplugin/man.vim
 "set makeprg=~/scripts/g_script.csh\ %\
 "set makeprg=~/scripts/makeprg\ %\
 
-if !empty($DEV8ELENABLED) && !empty( split( globpath( '.', '*.pro' ), '\n') ) "checking pure Makefile or  Qt pro file
-    ":echo "*.pro file found. "
+if !empty($DEV8ELENABLED)
+    \&& (
+        \!empty( split( globpath( '.', '*.pro' ), '\n') )
+        \|| !empty( split( globpath( '.', 'Makefile' ), '\n') )
+    \) "checking pure Makefile or  Qt pro file
+    "echo "*.pro or Makefile file found. "
 
-    :set makeprg=make\ -j8
+    set makeprg=make\ -j8
 else
-    ":echo "*.pro file NOT found. "
+    "echo "*.pro or Makefile file NOT found. "
 
-    :set makeprg=~/scripts/cmakeprg\ %\
+    set makeprg=~/scripts/cmakeprg\ %\
 endif
 
-set grepprg=ack\ --nogroup\ $*
+"set grepprg=ack\ --nogroup\ $*
+if executable('rg')
+    set grepprg=rg\ --vimgrep
+    set grepformat=%f:%l:%c:%m
+endif
+nnoremap gw :grep <cword> . <cr>
+
+
 set foldmethod=indent
 
 set cursorline
@@ -630,7 +761,7 @@ endif
 
 
 
-    "set keymap=russian-jcukenwin
+    set keymap=russian-jcukenwin
     set iminsert=0
     set imsearch=0
     highlight Cursor guifg=NONE guibg=Green
@@ -648,8 +779,8 @@ command NSP setlocal nospell
 
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 "set tags=./tags,tags;$HOME
-"set tags=./tags,tags
-set tags=tags
+set tags=./tags,tags
+"set tags=tags
 
 "if has('cscope') && !empty($CSENABLED)
 "    silent cs f g main
@@ -669,3 +800,13 @@ command AN execute "ALENextWrap"
 command AP execute "ALEPreviousWrap"
 
 command DM execute "redir! > /tmp/vim_maps.txt| silent map| silent map! |  redir END| edit /tmp/vim_maps.txt"
+
+
+"if open curly in the end of line
+if 0
+
+    :map [[ ?{<CR>w99[{
+    :map ][ /}<CR>b99]}
+    :map ]] j0[[%/{<CR>
+    :map [] k$][%?}<CR>
+endif
