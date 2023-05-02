@@ -348,6 +348,9 @@ let g:asyncrun_open = 6
 "#
 
 
+Plug 'dhruvasagar/vim-table-mode'
+
+
 " Initialize plugin system
 call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -634,6 +637,7 @@ set foldmethod=indent
 
 if &diff
     set lines=999 columns=999
+    set scrollbind
 
     colorscheme oceanblack256
     "colorscheme doriath
