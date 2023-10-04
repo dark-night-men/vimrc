@@ -7,6 +7,8 @@
 set laststatus=2
 set statusline+=%F
 
+packadd cfilter "quickfix filter"
+
 "Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -40,7 +42,17 @@ Plugin 'vim-scripts/autoproto.vim'
 Plugin 'vim-scripts/valgrind.vim'
 "Plugin 'vim-scripts/calendar.vim--Matsumoto'
 
+if 0
 Plugin 'Valloric/YouCompleteMe'
+
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_show_diagnostics_ui = 0
+"let g:ycm_echo_current_diagnostic = 0
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+"let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_server_log_level = 'debug'
+endif
 
 Plugin 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
@@ -126,10 +138,23 @@ Plugin 'vimwiki/vimwiki'
 "Plugin 'SidOfc/mkdx'
 "Plugin 'dhruvasagar/vim-table-mode'
 
+if 1
 if empty($ALEDISABLED)
     Plugin 'dense-analysis/ale'
     nmap <silent> <leader>aj :ALENext<cr>
     nmap <silent> <leader>ak :ALEPrevious<cr>
+
+    " nmap <F9> <Plug>(ale_fix) "to implement alefixer
+
+    " Map movement through errors without wrapping.
+    nmap <silent> <C-k> <Plug>(ale_previous)
+    nmap <silent> <C-j> <Plug>(ale_next)
+
+    " OR map keys to use wrapping.
+    " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    " nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+endif
 endif
 
 "Plugin 'dkprice/vim-easygrep'
@@ -299,6 +324,8 @@ Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download()  }  }
 
+if 1
+
 Plug 'liuchengxu/vista.vim'
 "vista.vim options
 function! NearestMethodOrFunction() abort
@@ -314,9 +341,10 @@ set statusline+=%{NearestMethodOrFunction()}
 " " you can add the following line to your vimrc
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction() 
 
-"let g:vista#renderer#enable_icon = 1
+" let g:vista#renderer#enable_icon = 1
 
 "vista.vim options END
+endif
 
 Plug 'cpiger/NeoDebug'
 
@@ -353,7 +381,9 @@ let g:asyncrun_open = 6
 
 Plug 'dhruvasagar/vim-table-mode'
 
+if 1
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 "coc.nvim config BEGIN
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
@@ -405,7 +435,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> g6 <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -518,6 +548,9 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 "coc.nvim config END
 
+endif
+
+
 Plug 'tacahiroy/ctrlp-funky'
 "ctrlp-funky config BEGIN
 
@@ -530,8 +563,11 @@ let g:ctrlp_funky_syntax_highlight = 1
 
 "ctrlp-funky config END
 
+Plug 'junegunn/vim-peekaboo'
+
 " Initialize plugin system
 call plug#end()
+"Plug plugin system END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "vim-modern-cpp options
@@ -621,11 +657,6 @@ filetype off
 filetype plugin indent on
 syntax on
 
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_show_diagnostics_ui = 0
-"let g:ycm_echo_current_diagnostic = 0
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
 "let g:syntastic_echo_current_error = 0
 "for syntastic
 set statusline+=%#warningmsg#
@@ -646,7 +677,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo desert256v2 "doesn't show git signs ?
 "colo desert256
 
-"colo summerfruit256
+"colo summerfruit256            "coc"
 "colo devbox-dark-256
 "colo lizard256
 "colo twilight256
@@ -655,13 +686,13 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo tigrana-256-dark
 "colo seoul256
 
-"colo Chasing_Logic
+"colo Chasing_Logic             "coc"
 "-----------------------
-"colo colozone
+"colo colorzone
 "colo PapayaWhip
-"colo PaperColor
+"colo PaperColor                "light"
 "colo sole
-"colo lingodirector
+"colo lingodirector             "light"
 "colo wikipedia
 "colo bluish
 "colo miko                      "dark "
@@ -674,7 +705,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo desert256v2 
 "colo darkblue2
  
-"colo tabula 201031
+"colo tabula 201031     "coc"
 
 "colo candy             "dark ++"
 "colo made_of_code      "dark +
@@ -720,7 +751,7 @@ colo asmanian2         "dark, light back, wrecked?"
 "test
 "colo reloaded
 "colo lilydjwg_dark
-"colo tatami
+"colo tatami                "coc"
 
 
 "get colorscheme name"
@@ -847,9 +878,6 @@ noremap <Right> <Nop>
 nnoremap ]i :call search('\<\w')<CR>
 
 runtime ftplugin/man.vim
-
-"let g:ycm_server_use_vim_stdout = 1
-"let g:ycm_server_log_level = 'debug'
 
 "set makeprg=~/scripts/g_script.csh\ %\
 "set makeprg=~/scripts/makeprg\ %\
@@ -993,3 +1021,5 @@ if 0
     :map ]] j0[[%/{<CR>
     :map [] k$][%?}<CR>
 endif
+
+set mouse=a
