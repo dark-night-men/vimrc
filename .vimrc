@@ -863,7 +863,8 @@ if &diff
     set lines=999 columns=999
     set scrollbind
 
-    colorscheme oceanblack256
+    colorscheme wikipedia
+    "colorscheme oceanblack256
     "colorscheme doriath
     "colorscheme BlackSea
     "colorscheme peachpuff
