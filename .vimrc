@@ -288,8 +288,11 @@ Plug 'mhinz/vim-rfc'
 
 "Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 
+set rtp+=~/.fzf
+
+Plug '~/.fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
+" Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 "Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}     "do not exists any more"
@@ -564,6 +567,17 @@ let g:ctrlp_funky_syntax_highlight = 1
 "ctrlp-funky config END
 
 Plug 'junegunn/vim-peekaboo'
+
+
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier',
+    \ { 'do': 'yarn install --frozen-lockfile --production',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+"improve movement
+Plug 'inkarkat/vim-CountJump'
+Plug 'inkarkat/vim-ingo-library'
+
 
 " Initialize plugin system
 call plug#end()
@@ -1022,4 +1036,6 @@ if 0
     :map [] k$][%?}<CR>
 endif
 
-set mouse=a
+"set mouse=a "paste into vim in putty do not working"
+" set tags+=/home/zerg/projects/webdev/vimium-c/tags
+set tags=/home/zerg/projects/webdev/vimium-c/tags
