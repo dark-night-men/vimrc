@@ -568,13 +568,14 @@ let g:ctrlp_funky_syntax_highlight = 1
 
 Plug 'junegunn/vim-peekaboo'
 
-
 " post install (yarn install | npm install) then load plugin only for editing supported files
-
 Plug 'prettier/vim-prettier',
     \ { 'do': 'yarn install --frozen-lockfile --production',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
+"improve movement
+Plug 'inkarkat/vim-CountJump'
+Plug 'inkarkat/vim-ingo-library'
 
 " Initialize plugin system
 call plug#end()
@@ -862,7 +863,8 @@ if &diff
     set lines=999 columns=999
     set scrollbind
 
-    colorscheme oceanblack256
+    colorscheme wikipedia
+    "colorscheme oceanblack256
     "colorscheme doriath
     "colorscheme BlackSea
     "colorscheme peachpuff
