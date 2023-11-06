@@ -286,10 +286,13 @@ Plug 'mhinz/vim-rfc'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 
+set rtp+=~/.fzf
+
+Plug '~/.fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
+"Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 "Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}     "do not exists any more"
@@ -565,6 +568,14 @@ let g:ctrlp_funky_syntax_highlight = 1
 
 Plug 'junegunn/vim-peekaboo'
 
+
+" post install (yarn install | npm install) then load plugin only for editing supported files
+
+Plug 'prettier/vim-prettier',
+    \ { 'do': 'yarn install --frozen-lockfile --production',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+
 " Initialize plugin system
 call plug#end()
 "Plug plugin system END
@@ -600,8 +611,7 @@ nmap g4 :Gtags -g <C-R><C-W><CR>
 nmap g5 :Gtags -i
 
 
-
-map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " .. nr .. "[\t"<CR>
 map <F5> :exec("cs f s ".expand("<cword>"))<CR>
 
 "map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -646,8 +656,11 @@ set tabpagemax=10
 
 if has("gui_running")
   if has("gui_gtk2")
-    set guifont=Monospace\ 13
-    ""set guifont=Verdana\ 13
+
+    set guifont=Monofur\ Nerd\ Font\ Mono\ 24
+
+    "set guifont=Verdana\ 13
+    "set guifont=Monospace\ 13
   elseif has("gui_win32")
     set guifont=Consolas:h11:cANSI
   endif
@@ -718,7 +731,6 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo mayansmoke        "light
 "colo messy             "light
 "colo moss              "dark
-"colo monokai-phoenix   "dark c
 "colo moonshine_minimal "dark
 "colo murphy            "dark +"
 "colo mushroom          "very dark"
@@ -727,6 +739,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo antares           "dark"
 "colo apprentice        "dark"
 "colo archery           "dark"
+" colo monokai-phoenix   "dark c
 colo asmanian2         "dark, light back, wrecked?"
 "colo aurora            "light"
 "colo autumn            "light
@@ -1022,4 +1035,6 @@ if 0
     :map [] k$][%?}<CR>
 endif
 
-set mouse=a
+"set mouse=a "paste into vim in putty do not working"
+" set tags+=/home/zerg/projects/webdev/vimium-c/tags
+set tags=/home/zerg/projects/webdev/vimium-c/tags
