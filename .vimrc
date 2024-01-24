@@ -1,3 +1,5 @@
+set tags=./tags,tags
+
 "TODO Add Plugin lh-cpp
 "
 
@@ -138,7 +140,7 @@ Plugin 'vimwiki/vimwiki'
 "Plugin 'SidOfc/mkdx'
 "Plugin 'dhruvasagar/vim-table-mode'
 
-if 1
+if 0
 if empty($ALEDISABLED)
     Plugin 'dense-analysis/ale'
     nmap <silent> <leader>aj :ALENext<cr>
@@ -200,7 +202,7 @@ let g:snipMate = { 'snippet_version' : 1 }
 """Plugin 'vim/matchit.vim' "runtime/pack/dist/opt/matchit/plugin/matchit.vim "buggy ?
 """Plugin 'jpalardy/slime.vim'  "buggy"
 
-Plugin 'ervandew/supertab'         
+" Plugin 'ervandew/supertab'         
 "Plugin 'vimballPlugin.vim'    
 Plugin 'zencoding.vim'        
 
@@ -384,7 +386,7 @@ let g:asyncrun_open = 6
 
 Plug 'dhruvasagar/vim-table-mode'
 
-if 1
+if 1 && !&diff
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "coc.nvim config BEGIN
@@ -458,7 +460,8 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
+" nmap <leader>rn <Plug>(coc-rename) "occupyed by rtag plugin"
+nmap <leader>nn <Plug>(coc-rename)
 
 " Formatting selected code
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -551,7 +554,105 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 "coc.nvim config END
 
+"coc extensions
+
+" let g:coc_global_extensions = [
+"             \ 'coc-json', 'coc-git', 'coc-vimlsp', 'coc-snippets', 'coc-fzf-preview', 'coc-diagnostic',
+"             \ 'coc-highlight', 'coc-sh', 'coc-clangd'
+"             \ ]
+
+let g:coc_global_extensions = [
+            \ 'coc-json', 'coc-vimlsp', 'coc-snippets', 'coc-fzf-preview', 'coc-diagnostic',
+            \ 'coc-highlight', 'coc-sh', 'coc-clangd'
+            \ ]
+
+
+filetype on
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+"coc-vimlsp
+let g:markdown_fenced_languages = [
+            \ 'vim',
+            \ 'help'
+            \ ]
+
+"coc-git
+
+" " lightline
+" let g:lightline = {
+"   \ 'active': {
+"   \   'left': [
+"   \     [ 'mode', 'paste' ],
+"   \     [ 'ctrlpmark', 'git', 'diagnostic', 'cocstatus', 'filename', 'method' ]
+"   \   ],
+"   \   'right':[
+"   \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+"   \     [ 'blame' ]
+"   \   ],
+"   \ },
+"   \ 'component_function': {
+"   \   'blame': 'LightlineGitBlame',
+"   \ }
+" \ }
+
+" function! LightlineGitBlame() abort
+"   let blame = get(b:, 'coc_git_blame', '')
+"   " return blame
+"   return winwidth(0) > 120 ? blame : ''
+" endfunction
+
+" " navigate chunks of current buffer
+" nmap [g <Plug>(coc-git-prevchunk)
+" nmap ]g <Plug>(coc-git-nextchunk)
+" " navigate conflicts of current buffer
+" nmap [c <Plug>(coc-git-prevconflict)
+" nmap ]c <Plug>(coc-git-nextconflict)
+" " show chunk diff at current position
+" nmap gs <Plug>(coc-git-chunkinfo)
+" " show commit contains current position
+" nmap gc <Plug>(coc-git-commit)
+" " create text object for git chunks
+" omap ig <Plug>(coc-git-chunk-inner)
+" xmap ig <Plug>(coc-git-chunk-inner)
+" omap ag <Plug>(coc-git-chunk-outer)
+" xmap ag <Plug>(coc-git-chunk-outer)
+
+"end coc-git
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+"coc floating dirty hack
+if 1
+
+func! s:my_colors_setup() abort
+    " this is an example
+    " hi Pmenu guibg=#d7e5dc gui=NONE
+    " hi PmenuSel guibg=#b7c7b7 gui=NONE
+    " hi PmenuSbar guibg=#bcbcbc
+    " hi PmenuThumb guibg=#585858
+    "
+    
+    highlight CocFloating ctermbg=18
+    " highlight CocFloating ctermbg=12
+    " highlight CocFloating ctermbg=17
+    highlight CocErrorFloat ctermfg=red
+
+    " hi CocNotificationInfo ctermfg=white ctermbg=17
+    " hi CocNotificationWarning ctermfg=white ctermbg=2
+    hi CocWarningFloat ctermfg=4 ctermbg=3
+    hi CocInfoFloat ctermfg=white ctermbg=4
+
+
+
+endfunc
+
+augroup colorscheme_coc_setup | au!
+    au ColorScheme * call s:my_colors_setup()
+augroup END
+
 endif
+
+endif
+"endif coc
 
 
 Plug 'tacahiroy/ctrlp-funky'
@@ -693,12 +794,12 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 
 "colo summerfruit256            "coc"
 "colo devbox-dark-256
-"colo lizard256
+"colo lizard256                 "+"
 "colo twilight256
-"colo lapis256
+"colo lapis256                  "+"
 "colo oceanblack256.vim
 "colo tigrana-256-dark
-"colo seoul256
+"colo seoul256                  "++"
 
 "colo Chasing_Logic             "coc"
 "-----------------------
@@ -707,19 +808,18 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo PaperColor                "light"
 "colo sole
 "colo lingodirector             "light"
-"colo wikipedia
 "colo bluish
-"colo miko                      "dark "
+"colo miko                      "dark "+
 "colo softbluev2
 "colo Tomorrow
 "colo Tomorrow-Night-Blue
 "colo VIvid
 
-"colo calmar256-dark
+"colo calmar256-dark            "+
 "colo desert256v2 
 "colo darkblue2
  
-"colo tabula 201031     "coc"
+"colo tabula 201031     "coc" +++++++
 
 "colo candy             "dark ++"
 "colo made_of_code      "dark +
@@ -752,13 +852,13 @@ colo asmanian2         "dark, light back, wrecked?"
 "colo bensday           "dark, light back
 "colo birds-of-paradise "dark, warmred"
 "colo black_angus       "dark, green
-"colo blazer            "dark, warm
+"colo blazer            "dark, warm +
 "colo borland           "dark, blue back 
 "colo bubblegum-256-light   "light"
 "colo busybee               "dark"
 "colo burnttoast256         "dark +"
 "colo wikipedia             "light"
-"colo automation            "dark"
+"colo automation            "dark", +
 "colo gentooish             "dark"
 "colo railscasts            "dark"
 
@@ -842,11 +942,11 @@ if has('cscope')
     if !empty($CSENABLED)
 
         :silent exec("! { [[ -e ~/scripts/scope.sh ]] && { pushd $CSDIR; ~/scripts/scope.sh; pushd; } } >>/tmp/vimrc1.log 2>&1 ")
-        :if filereadable( $CSDIR . "/cscope.out" )
+        if filereadable( $CSDIR . "/cscope.out" )
             :silent cs add ${CSDIR}/cscope.out
         ":else
             "    :echo $CSDIR . "/cscope.out does not exist."
-        :endif
+        endif
 
     endif
 
@@ -905,6 +1005,7 @@ if !empty($DEV8ELENABLED)
     "echo "*.pro or Makefile file found. "
 
     set makeprg=make\ -j8
+    " set makeprg=bear\ --\ make\ -j8
 else
     "echo "*.pro or Makefile file NOT found. "
 
@@ -1039,4 +1140,6 @@ endif
 
 "set mouse=a "paste into vim in putty do not working"
 " set tags+=/home/zerg/projects/webdev/vimium-c/tags
-set tags=/home/zerg/projects/webdev/vimium-c/tags
+" set tags=/home/zerg/projects/webdev/vimium-c/tags
+
+set tags=./tags,tags
