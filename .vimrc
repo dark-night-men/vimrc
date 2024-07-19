@@ -69,7 +69,7 @@ Plugin 'Shougo/unite.vim'
 "Plugin 'weynhamz/vim-plugin-minibufexpl'
 Plugin 'mbbill/undotree'
 
-Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 
 Plugin 'majutsushi/tagbar'
@@ -87,7 +87,7 @@ set hidden
 let g:airline_exclude_preview = 1
 let g:CtrlSpaceUseTabline = 1
 
-Plugin 'vim-ctrlspace/vim-ctrlspace'
+" Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
@@ -490,7 +490,6 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Remap keys for applying refactor code actions
 nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
 xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 
 " Run the Code Lens action on the current line
 nmap <leader>cl  <Plug>(coc-codelens-action)
@@ -620,8 +619,8 @@ let g:markdown_fenced_languages = [
 "end coc-git
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
-"coc floating dirty hack
-if 1
+"coc floating colors dirty hack
+if 1 && !has("gui_running")
 
 func! s:my_colors_setup() abort
     " this is an example
@@ -631,17 +630,22 @@ func! s:my_colors_setup() abort
     " hi PmenuThumb guibg=#585858
     "
     
-    highlight CocFloating ctermbg=18
-    " highlight CocFloating ctermbg=12
-    " highlight CocFloating ctermbg=17
-    highlight CocErrorFloat ctermfg=red
+    " highlight CocFloating ctermbg=18
+
+    "good case 1
+    " highlight PmenuSel       ctermfg=201 ctermbg=55 guibg=DarkGrey
+    " highlight link CocFloating ColorColumn
+
+    "copy from ColorColumn
+    hi PmenuSel ctermfg=white  ctermbg=1 guibg=DarkRed
+    hi CocFloating ctermfg=white ctermbg=18 guibg=DarkBlue
+
+    hi CocErrorFloat ctermfg=red
 
     " hi CocNotificationInfo ctermfg=white ctermbg=17
     " hi CocNotificationWarning ctermfg=white ctermbg=2
     hi CocWarningFloat ctermfg=4 ctermbg=3
     hi CocInfoFloat ctermfg=white ctermbg=4
-
-
 
 endfunc
 
@@ -790,7 +794,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo sublimemonokai
 
 "colo desert256v2 "doesn't show git signs ?
-"colo desert256
+"colo desert256                  "fav"
 
 "colo summerfruit256            "coc"
 "colo devbox-dark-256
@@ -840,8 +844,9 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo antares           "dark"
 "colo apprentice        "dark"
 "colo archery           "dark"
-" colo monokai-phoenix   "dark c
-colo asmanian2         "dark, light back, wrecked?"
+"colo monokai-phoenix   "dark c
+colo asmanian2         "dark, light back, wrecked?" fav
+
 "colo aurora            "light"
 "colo autumn            "light
 "colo autumnleaf        "light contrast +
@@ -852,7 +857,7 @@ colo asmanian2         "dark, light back, wrecked?"
 "colo bensday           "dark, light back
 "colo birds-of-paradise "dark, warmred"
 "colo black_angus       "dark, green
-"colo blazer            "dark, warm +
+"colo blazer            "dark, warm +, fav
 "colo borland           "dark, blue back 
 "colo bubblegum-256-light   "light"
 "colo busybee               "dark"
@@ -865,7 +870,7 @@ colo asmanian2         "dark, light back, wrecked?"
 "test
 "colo reloaded
 "colo lilydjwg_dark
-"colo tatami                "coc"
+"colo tatami                "coc"fav
 
 
 "get colorscheme name"
@@ -942,14 +947,13 @@ if has('cscope')
     if !empty($CSENABLED)
 
         :silent exec("! { [[ -e ~/scripts/scope.sh ]] && { pushd $CSDIR; ~/scripts/scope.sh; pushd; } } >>/tmp/vimrc1.log 2>&1 ")
-        if filereadable( $CSDIR . "/cscope.out" )
-            :silent cs add ${CSDIR}/cscope.out
-        ":else
-            "    :echo $CSDIR . "/cscope.out does not exist."
-        endif
-
     endif
 
+    if filereadable( $CSDIR . "/cscope.out" )
+        :silent cs add ${CSDIR}/cscope.out
+        ":else
+        "    :echo $CSDIR . "/cscope.out does not exist."
+    endif
 endif
 
 "set makeprg=~/scripts/g_script_opt.sh\ $*
@@ -1143,3 +1147,25 @@ endif
 " set tags=/home/zerg/projects/webdev/vimium-c/tags
 
 set tags=./tags,tags
+
+if has("gui_running")
+    if has("gui_gtk2")
+
+        set guifont=Monofur\ Nerd\ Font\ Mono\ 12
+        colo DarkDefault
+        colo seoul256
+        colo welpe
+        colo xian
+        colo adventurous
+        colo softbluev2
+        colo atom
+        colo tabula
+
+
+
+        "set guifont=Verdana\ 13
+        "set guifont=Monospace\ 13
+    elseif has("gui_win32")
+        set guifont=Consolas:h11:cANSI
+    endif
+endif
