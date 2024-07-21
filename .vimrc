@@ -19,7 +19,6 @@ endif
 "hi link CtrlSpaceSearch IncSearch
 "hi CtrlSpaceSearch guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -267,10 +266,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
-"Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}     "do not exists any more"
-
-nnoremap <Leader>q :Quickfix<CR>
-nnoremap <Leader>l :Quickfix!<CR>
+" Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
+" nnoremap <Leader>q :Quickfix<CR>
+" nnoremap <Leader>l :Quickfix!<CR>
 
 Plug 'nblock/vim-dokuwiki'
 let dokuwiki_comment=1
@@ -297,7 +295,7 @@ Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 "Plug '~/my-prototype-plugin'
 
 
-Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download()  }  }
+"Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download()  }  }
 
 Plug 'liuchengxu/vista.vim'
 "vista.vim options
@@ -432,6 +430,18 @@ set tabpagemax=10
 if has("gui_running")
   if has("gui_gtk2")
     set guifont=Monospace\ 13
+    set guifont=TerminessTTF\ NF\ Medium\ 15
+    set guifont=Hack\ NF\ 13
+    set guifont=CodeNewRoman\ NF\ 13
+    set guifont=SpaceMono\ NF\ 13
+    set guifont=ProFontIIx\ Nerd\ Font\ 13
+    set guifont=agave\ NF\ 15
+    set guifont=FantasqueSansMono\ NF\ 15
+    set guifont=Hasklug\ NF\ Medium\ 13
+    set guifont=Hurmit\ NF\ Medium\ 13
+    "set guifont=Monofur\ NF\ Medium\ 13
+    set guifont=Monofur\ NF\ 15
+    "set guifont=ProFontWindows\ NF\ 15
     ""set guifont=Verdana\ 13
   elseif has("gui_win32")
     set guifont=Consolas:h11:cANSI
@@ -456,6 +466,8 @@ let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
 
 hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
+
+set t_Co=256
 "colo desert
 "colo elflord
 "colo industry
@@ -496,10 +508,12 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo darkblue2
  
 "colo tabula 201031
-
 "colo candy             "dark ++"
 "colo made_of_code      "dark +
 
+"colo candy             "dark ++"
+"colo automation         "dark"
+"colo mint               "dark" gui
 "colo BlackSea
 
 "colo cake              "light +
@@ -509,7 +523,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo messy             "light
 "colo moss              "dark
 "colo monokai-phoenix   "dark c
-"colo moonshine_minimal "dark
+colo moonshine_minimal "dark +
 "colo murphy            "dark +"
 "colo mushroom          "very dark"
 "colo adventurous       "dark"
@@ -517,7 +531,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo antares           "dark"
 "colo apprentice        "dark"
 "colo archery           "dark"
-colo asmanian2         "dark, light back, wrecked?"
+"colo asmanian2         "dark, light back, wrecked?"
 "colo aurora            "light"
 "colo autumn            "light
 "colo autumnleaf        "light contrast +
@@ -543,9 +557,20 @@ colo asmanian2         "dark, light back, wrecked?"
 "colo lilydjwg_dark
 "colo tatami
 
+"colo gobo
+"colo goldenrod
+"colo Benokai
+
 
 "get colorscheme name"
 "echo g:colors_name
+
+if has("gui_running")
+    "gui
+    colo cobalt
+    colo navajo-night
+    colo h80
+endif
 
 syntax on
 set hlsearch
@@ -786,9 +811,9 @@ set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 set tags=./tags,tags
 "set tags=tags
 
-"if has('cscope') && !empty($CSENABLED)
-"    silent cs f g main
-"endif
+if has('cscope') && !empty($CSENABLED) && filereadable( $CSDIR . "/cscope.out" )
+    silent cs f g main
+endif
 
 "read pdf xpdf must be installed
 ":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
