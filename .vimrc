@@ -1,3 +1,5 @@
+set tags=./tags,tags
+
 "TODO Add Plugin lh-cpp
 "
 
@@ -6,6 +8,8 @@
 
 set laststatus=2
 set statusline+=%F
+
+packadd cfilter "quickfix filter"
 
 "Vundle
 set nocompatible              " be iMproved, required
@@ -39,7 +43,17 @@ Plugin 'vim-scripts/autoproto.vim'
 Plugin 'vim-scripts/valgrind.vim'
 "Plugin 'vim-scripts/calendar.vim--Matsumoto'
 
+if 0
 Plugin 'Valloric/YouCompleteMe'
+
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_show_diagnostics_ui = 0
+"let g:ycm_echo_current_diagnostic = 0
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+"let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_server_log_level = 'debug'
+endif
 
 Plugin 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
@@ -54,7 +68,7 @@ Plugin 'Shougo/unite.vim'
 "Plugin 'weynhamz/vim-plugin-minibufexpl'
 Plugin 'mbbill/undotree'
 
-Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 
 Plugin 'majutsushi/tagbar'
@@ -72,7 +86,7 @@ set hidden
 let g:airline_exclude_preview = 1
 let g:CtrlSpaceUseTabline = 1
 
-Plugin 'vim-ctrlspace/vim-ctrlspace'
+" Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
@@ -125,10 +139,23 @@ Plugin 'vimwiki/vimwiki'
 "Plugin 'SidOfc/mkdx'
 "Plugin 'dhruvasagar/vim-table-mode'
 
+if 0
 if empty($ALEDISABLED)
     Plugin 'dense-analysis/ale'
     nmap <silent> <leader>aj :ALENext<cr>
     nmap <silent> <leader>ak :ALEPrevious<cr>
+
+    " nmap <F9> <Plug>(ale_fix) "to implement alefixer
+
+    " Map movement through errors without wrapping.
+    nmap <silent> <C-k> <Plug>(ale_previous)
+    nmap <silent> <C-j> <Plug>(ale_next)
+
+    " OR map keys to use wrapping.
+    " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    " nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+endif
 endif
 
 "Plugin 'dkprice/vim-easygrep'
@@ -174,7 +201,7 @@ let g:snipMate = { 'snippet_version' : 1 }
 """Plugin 'vim/matchit.vim' "runtime/pack/dist/opt/matchit/plugin/matchit.vim "buggy ?
 """Plugin 'jpalardy/slime.vim'  "buggy"
 
-Plugin 'ervandew/supertab'         
+" Plugin 'ervandew/supertab'         
 "Plugin 'vimballPlugin.vim'    
 Plugin 'zencoding.vim'        
 
@@ -260,10 +287,13 @@ Plug 'mhinz/vim-rfc'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 
+set rtp+=~/.fzf
+
+Plug '~/.fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
+"Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 " Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
@@ -297,6 +327,8 @@ Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 "Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download()  }  }
 
+if 1
+
 Plug 'liuchengxu/vista.vim'
 "vista.vim options
 function! NearestMethodOrFunction() abort
@@ -311,7 +343,11 @@ set statusline+=%{NearestMethodOrFunction()}
 " automatically,
 " " you can add the following line to your vimrc
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction() 
+
+" let g:vista#renderer#enable_icon = 1
+
 "vista.vim options END
+endif
 
 Plug 'cpiger/NeoDebug'
 
@@ -348,9 +384,305 @@ let g:asyncrun_open = 6
 
 Plug 'dhruvasagar/vim-table-mode'
 
+if 1 && !&diff
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+"coc.nvim config BEGIN
+
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation
+nmap <silent> g6 <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming
+" nmap <leader>rn <Plug>(coc-rename) "occupyed by rtag plugin"
+nmap <leader>nn <Plug>(coc-rename)
+
+" Formatting selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s)
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying code actions to the selected code block
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying code actions at the cursor position
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer
+nmap <leader>as  <Plug>(coc-codeaction-source)
+" Apply the most preferred quickfix action to fix diagnostic on the current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
+" Run the Code Lens action on the current line
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> to scroll float windows/popups
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges
+" Requires 'textDocument/selectionRange' support of language server
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+"coc.nvim config END
+
+"coc extensions
+
+" let g:coc_global_extensions = [
+"             \ 'coc-json', 'coc-git', 'coc-vimlsp', 'coc-snippets', 'coc-fzf-preview', 'coc-diagnostic',
+"             \ 'coc-highlight', 'coc-sh', 'coc-clangd'
+"             \ ]
+
+let g:coc_global_extensions = [
+            \ 'coc-json', 'coc-vimlsp', 'coc-snippets', 'coc-fzf-preview', 'coc-diagnostic',
+            \ 'coc-highlight', 'coc-sh', 'coc-clangd'
+            \ ]
+
+
+filetype on
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+"coc-vimlsp
+let g:markdown_fenced_languages = [
+            \ 'vim',
+            \ 'help'
+            \ ]
+
+"coc-git
+
+" " lightline
+" let g:lightline = {
+"   \ 'active': {
+"   \   'left': [
+"   \     [ 'mode', 'paste' ],
+"   \     [ 'ctrlpmark', 'git', 'diagnostic', 'cocstatus', 'filename', 'method' ]
+"   \   ],
+"   \   'right':[
+"   \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+"   \     [ 'blame' ]
+"   \   ],
+"   \ },
+"   \ 'component_function': {
+"   \   'blame': 'LightlineGitBlame',
+"   \ }
+" \ }
+
+" function! LightlineGitBlame() abort
+"   let blame = get(b:, 'coc_git_blame', '')
+"   " return blame
+"   return winwidth(0) > 120 ? blame : ''
+" endfunction
+
+" " navigate chunks of current buffer
+" nmap [g <Plug>(coc-git-prevchunk)
+" nmap ]g <Plug>(coc-git-nextchunk)
+" " navigate conflicts of current buffer
+" nmap [c <Plug>(coc-git-prevconflict)
+" nmap ]c <Plug>(coc-git-nextconflict)
+" " show chunk diff at current position
+" nmap gs <Plug>(coc-git-chunkinfo)
+" " show commit contains current position
+" nmap gc <Plug>(coc-git-commit)
+" " create text object for git chunks
+" omap ig <Plug>(coc-git-chunk-inner)
+" xmap ig <Plug>(coc-git-chunk-inner)
+" omap ag <Plug>(coc-git-chunk-outer)
+" xmap ag <Plug>(coc-git-chunk-outer)
+
+"end coc-git
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+"coc floating colors dirty hack
+if 1 && !has("gui_running")
+
+func! s:my_colors_setup() abort
+    " this is an example
+    " hi Pmenu guibg=#d7e5dc gui=NONE
+    " hi PmenuSel guibg=#b7c7b7 gui=NONE
+    " hi PmenuSbar guibg=#bcbcbc
+    " hi PmenuThumb guibg=#585858
+    "
+    
+    " highlight CocFloating ctermbg=18
+
+    "good case 1
+    " highlight PmenuSel       ctermfg=201 ctermbg=55 guibg=DarkGrey
+    " highlight link CocFloating ColorColumn
+
+    "copy from ColorColumn
+    hi PmenuSel ctermfg=white  ctermbg=1 guibg=DarkRed
+    hi CocFloating ctermfg=white ctermbg=18 guibg=DarkBlue
+
+    hi CocErrorFloat ctermfg=red
+
+    " hi CocNotificationInfo ctermfg=white ctermbg=17
+    " hi CocNotificationWarning ctermfg=white ctermbg=2
+    hi CocWarningFloat ctermfg=4 ctermbg=3
+    hi CocInfoFloat ctermfg=white ctermbg=4
+
+endfunc
+
+augroup colorscheme_coc_setup | au!
+    au ColorScheme * call s:my_colors_setup()
+augroup END
+
+endif
+
+endif
+"endif coc
+
+
+Plug 'tacahiroy/ctrlp-funky'
+"ctrlp-funky config BEGIN
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>uu :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+let g:ctrlp_funky_matchtype = 'path'
+let g:ctrlp_funky_syntax_highlight = 1
+
+"ctrlp-funky config END
+
+Plug 'junegunn/vim-peekaboo'
+
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier',
+    \ { 'do': 'yarn install --frozen-lockfile --production',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+"improve movement
+Plug 'inkarkat/vim-CountJump'
+Plug 'inkarkat/vim-ingo-library'
 
 " Initialize plugin system
 call plug#end()
+"Plug plugin system END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "vim-modern-cpp options
@@ -383,8 +715,7 @@ nmap g4 :Gtags -g <C-R><C-W><CR>
 nmap g5 :Gtags -i
 
 
-
-map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " .. nr .. "[\t"<CR>
 map <F5> :exec("cs f s ".expand("<cword>"))<CR>
 
 "map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -452,11 +783,6 @@ filetype off
 filetype plugin indent on
 syntax on
 
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_show_diagnostics_ui = 0
-"let g:ycm_echo_current_diagnostic = 0
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
 "let g:syntastic_echo_current_error = 0
 "for syntastic
 set statusline+=%#warningmsg#
@@ -477,37 +803,36 @@ set t_Co=256
 "colo sublimemonokai
 
 "colo desert256v2 "doesn't show git signs ?
-"colo desert256
+"colo desert256                  "fav"
 
-"colo summerfruit256
+"colo summerfruit256            "coc"
 "colo devbox-dark-256
-"colo lizard256
+"colo lizard256                 "+"
 "colo twilight256
-"colo lapis256
+"colo lapis256                  "+"
 "colo oceanblack256.vim
 "colo tigrana-256-dark
-"colo seoul256
+"colo seoul256                  "++"
 
-"colo Chasing_Logic
+"colo Chasing_Logic             "coc"
 "-----------------------
-"colo colozone
+"colo colorzone
 "colo PapayaWhip
-"colo PaperColor
+"colo PaperColor                "light"
 "colo sole
-"colo lingodirector
-"colo wikipedia
+"colo lingodirector             "light"
 "colo bluish
-"colo miko                      "dark "
+"colo miko                      "dark "+
 "colo softbluev2
 "colo Tomorrow
 "colo Tomorrow-Night-Blue
 "colo VIvid
 
-"colo calmar256-dark
+"colo calmar256-dark            "+
 "colo desert256v2 
 "colo darkblue2
  
-"colo tabula 201031
+"colo tabula 201031     "coc" +++++++
 "colo candy             "dark ++"
 "colo made_of_code      "dark +
 
@@ -542,20 +867,20 @@ colo moonshine_minimal "dark +
 "colo bensday           "dark, light back
 "colo birds-of-paradise "dark, warmred"
 "colo black_angus       "dark, green
-"colo blazer            "dark, warm
+"colo blazer            "dark, warm +, fav
 "colo borland           "dark, blue back 
 "colo bubblegum-256-light   "light"
 "colo busybee               "dark"
 "colo burnttoast256         "dark +"
 "colo wikipedia             "light"
-"colo automation            "dark"
+"colo automation            "dark", +
 "colo gentooish             "dark"
 "colo railscasts            "dark"
 
 "test
 "colo reloaded
 "colo lilydjwg_dark
-"colo tatami
+"colo tatami                "coc"fav
 
 "colo gobo
 "colo goldenrod
@@ -643,14 +968,13 @@ if has('cscope')
     if !empty($CSENABLED)
 
         :silent exec("! { [[ -e ~/scripts/scope.sh ]] && { pushd $CSDIR; ~/scripts/scope.sh; pushd; } } >>/tmp/vimrc1.log 2>&1 ")
-        :if filereadable( $CSDIR . "/cscope.out" )
-            :silent cs add ${CSDIR}/cscope.out
-        ":else
-            "    :echo $CSDIR . "/cscope.out does not exist."
-        :endif
-
     endif
 
+    if filereadable( $CSDIR . "/cscope.out" )
+        :silent cs add ${CSDIR}/cscope.out
+        ":else
+        "    :echo $CSDIR . "/cscope.out does not exist."
+    endif
 endif
 
 "set makeprg=~/scripts/g_script_opt.sh\ $*
@@ -664,6 +988,7 @@ if &diff
     set lines=999 columns=999
     set scrollbind
 
+    "colorscheme wikipedia
     colorscheme oceanblack256
     "colorscheme doriath
     "colorscheme BlackSea
@@ -694,9 +1019,6 @@ nnoremap ]i :call search('\<\w')<CR>
 
 runtime ftplugin/man.vim
 
-"let g:ycm_server_use_vim_stdout = 1
-"let g:ycm_server_log_level = 'debug'
-
 "set makeprg=~/scripts/g_script.csh\ %\
 "set makeprg=~/scripts/makeprg\ %\
 
@@ -708,6 +1030,7 @@ if !empty($DEV8ELENABLED)
     "echo "*.pro or Makefile file found. "
 
     set makeprg=make\ -j8
+    " set makeprg=bear\ --\ make\ -j8
 else
     "echo "*.pro or Makefile file NOT found. "
 
@@ -838,4 +1161,32 @@ if 0
     :map ][ /}<CR>b99]}
     :map ]] j0[[%/{<CR>
     :map [] k$][%?}<CR>
+endif
+
+"set mouse=a "paste into vim in putty do not working"
+" set tags+=/home/zerg/projects/webdev/vimium-c/tags
+" set tags=/home/zerg/projects/webdev/vimium-c/tags
+
+set tags=./tags,tags
+
+if has("gui_running")
+    if has("gui_gtk2")
+
+        set guifont=Monofur\ Nerd\ Font\ Mono\ 12
+        colo DarkDefault
+        colo seoul256
+        colo welpe
+        colo xian
+        colo adventurous
+        colo softbluev2
+        colo atom
+        colo tabula
+
+
+
+        "set guifont=Verdana\ 13
+        "set guifont=Monospace\ 13
+    elseif has("gui_win32")
+        set guifont=Consolas:h11:cANSI
+    endif
 endif
