@@ -637,13 +637,33 @@ func! s:my_colors_setup() abort
     " highlight link CocFloating ColorColumn
 
     "copy from ColorColumn
-    hi PmenuSel ctermfg=white  ctermbg=1 guibg=DarkRed
-    hi CocFloating ctermfg=white ctermbg=18 guibg=DarkBlue
+    " hi PmenuSel ctermfg=white  ctermbg=1 guibg=DarkRed cterm=underline
+    " hi CocFloating ctermfg=white ctermbg=18 guibg=DarkBlue
 
-    hi CocErrorFloat ctermfg=red
+    "+ works with any colorscheme -not very good looking
+    hi PmenuSel ctermbg=18 
+    hi CocFloating ctermfg=white ctermbg=1 
+
+    "CocHighlightText linked to CursorColumn
+    hi CursorColumn   term=reverse ctermbg=red
+
+    "*darkred
+    " hi CocFloating ctermfg=white ctermbg=1 guibg=DarkBlue
+
+    "*desert
+    " hi CocFloating ctermfg=white ctermbg=3 guibg=DarkBlue
+
+    "*grey *******
+    " hi CocFloating ctermfg=11 ctermbg=8 guibg=DarkBlue
+
+
+    "yellow text over red background
+    " hi CocErrorFloat ctermfg=red
+    hi CocErrorFloat ctermfg=yellow
 
     " hi CocNotificationInfo ctermfg=white ctermbg=17
     " hi CocNotificationWarning ctermfg=white ctermbg=2
+
     hi CocWarningFloat ctermfg=4 ctermbg=3
     hi CocInfoFloat ctermfg=white ctermbg=4
 
@@ -845,6 +865,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo apprentice        "dark"
 "colo archery           "dark"
 "colo monokai-phoenix   "dark c
+
 colo asmanian2         "dark, light back, wrecked?" fav
 
 "colo aurora            "light"
@@ -960,7 +981,6 @@ endif
 "set makeprg=~/scripts/g_script.sh\ $*
 
 hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
-set foldmethod=indent
 
 
 if &diff
