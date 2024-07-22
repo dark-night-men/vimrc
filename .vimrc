@@ -289,12 +289,15 @@ Plug 'mhinz/vim-rfc'
 
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 
-set rtp+=~/.fzf
 
-Plug '~/.fzf'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+ set rtp+=~/.fzf
+ 
+ Plug '~/.fzf'
+ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+ Plug 'junegunn/fzf.vim'
+
+
 "Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
-Plug 'junegunn/fzf.vim'
 
 " Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
 " nnoremap <Leader>q :Quickfix<CR>
@@ -616,9 +619,9 @@ let g:markdown_fenced_languages = [
 
 "end coc-git
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
 "coc floating colors dirty hack
 if 1 && !has("gui_running")
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 func! s:my_colors_setup() abort
     " this is an example
@@ -1129,7 +1132,7 @@ command NSP setlocal nospell
 "do not expand tab in Makefiles
 "autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 
-set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+" set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 "set tags=./tags,tags;$HOME
 set tags=./tags,tags
 "set tags=tags
