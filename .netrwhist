@@ -1,4 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/net/msc156/export/home/agibalov/work/wspaces/agibalov_pvs1310_W2/pvs/src/libguireport/src/linuxopt_64'
-let g:netrw_dirhist_2='/home/agibalov/.vim'
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/zerg/bashtips'

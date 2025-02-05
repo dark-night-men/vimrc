@@ -1,3 +1,6 @@
+" set maxmempattern=5000
+set maxmempattern=2000000
+
 set tags=./tags,tags
 
 "TODO Add Plugin lh-cpp
@@ -387,6 +390,7 @@ let g:asyncrun_open = 6
 Plug 'dhruvasagar/vim-table-mode'
 
 if 1 && !&diff
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "coc.nvim config BEGIN
@@ -484,7 +488,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction-cursor)
 " Remap keys for apply code actions affect whole buffer
 nmap <leader>as  <Plug>(coc-codeaction-source)
-" Apply the most preferred quickfix action to fix diagnostic on the current line
+" Apply the most preferred quickfix action to fix diagnostic on the current line "fav"
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Remap keys for applying refactor code actions
@@ -702,6 +706,8 @@ Plug 'prettier/vim-prettier',
 Plug 'inkarkat/vim-CountJump'
 Plug 'inkarkat/vim-ingo-library'
 
+Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+
 " Initialize plugin system
 call plug#end()
 "Plug plugin system END
@@ -892,7 +898,8 @@ colo asmanian2         "dark, light back, wrecked?" fav
 "colo reloaded
 "colo lilydjwg_dark
 "colo tatami                "coc"fav
-
+"colo corporation           "coc"
+"colo contrastneed
 
 "get colorscheme name"
 "echo g:colors_name
@@ -987,7 +994,8 @@ if &diff
     set lines=999 columns=999
     set scrollbind
 
-    colorscheme wikipedia
+    colorscheme contrastneed
+    "colorscheme wikipedia
     "colorscheme oceanblack256
     "colorscheme doriath
     "colorscheme BlackSea
