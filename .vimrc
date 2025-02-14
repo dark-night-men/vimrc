@@ -913,7 +913,7 @@ set path=.
 set complete-=i
 set complete-=t
 
-if has('cscope')
+if has('cscope') && !&diff
     set cscopetag cscopeverbose
     set csto=0
     "set csprg=/usr/local/bin/cscope
