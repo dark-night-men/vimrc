@@ -64,7 +64,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 Plugin 'bling/vim-bufferline'
 
-Plugin 'Zuckonit/vim-airline-todo'
+" Plugin 'Zuckonit/vim-airline-todo'                "useless"
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'asenac/vim-airline-loclist'
 
@@ -104,6 +104,9 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-scriptease'
 
 Plugin 'kien/ctrlp.vim'
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+                          \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+
 Plugin 'ciaranm/detectindent'
 Plugin 'powerline/powerline'
 "Plugin 'klen/python-mode'                  "Does not support Vundle
@@ -622,6 +625,43 @@ let g:markdown_fenced_languages = [
 
 "end coc-git
 
+
+"coc-snippets begin
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+"end coc-snippets 
+
 autocmd CursorHold * silent call CocActionAsync('highlight')
 "coc floating colors dirty hack
 if 1 && !has("gui_running")
@@ -707,6 +747,8 @@ Plug 'inkarkat/vim-CountJump'
 Plug 'inkarkat/vim-ingo-library'
 
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+Plug 'editorconfig/editorconfig-vim'
+Plug 'cdelledonne/vim-cmake'
 
 " Initialize plugin system
 call plug#end()
@@ -873,6 +915,7 @@ hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 "colo monokai-phoenix   "dark c
 
 colo asmanian2         "dark, light back, wrecked?" fav
+" colo iangenzo           "dark coc
 
 "colo aurora            "light"
 "colo autumn            "light
@@ -1197,3 +1240,5 @@ if has("gui_running")
         set guifont=Consolas:h11:cANSI
     endif
 endif
+
+let g:netrw_sizestyle = "H"
