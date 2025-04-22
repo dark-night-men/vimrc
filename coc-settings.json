@@ -1,0 +1,23 @@
+{
+    "diagnostic.enable": true,
+
+    "clangd.enabled": true,
+    "clangd.checkUpdates":true,
+    "semanticTokens.enable":true,
+    "semanticTokens.incrementTypes": [
+        "variable",
+        "string",
+        "parameter"
+    ],
+
+    "colors.enable": true,
+    "highlight.trace": "verbose",
+
+    "codeLens.enable": true,
+    "codeLens.display": true,
+
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/19.1.2/clangd_19.1.2/bin/clangd"
+    ,"clangd.showDBChangedNotification": true
+
+    ,"inlayHint.display": false
+}
