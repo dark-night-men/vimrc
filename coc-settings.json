@@ -1,22 +1,17 @@
 {
-    "diagnostic.enable": true,
+    "diagnostic.enable": true
 
-    "clangd.enabled": true,
-    "clangd.checkUpdates":true,
-    "semanticTokens.enable":true,
-    "semanticTokens.incrementTypes": [
-        "variable",
-        "string",
-        "parameter"
-    ],
+    ,"clangd.enabled": true
+    ,"clangd.checkUpdates": true
+    ,"semanticTokens.enable": true
 
-    "colors.enable": true,
-    "highlight.trace": "verbose",
+    ,"colors.enable": true
+    ,"highlight.trace": "verbose"
 
-    "codeLens.enable": true,
-    "codeLens.display": true,
+    ,"codeLens.enable": true
+    ,"codeLens.display": true
 
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/19.1.2/clangd_19.1.2/bin/clangd"
+    ,"clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/19.1.2/clangd_19.1.2/bin/clangd"
     ,"clangd.showDBChangedNotification": true
 
     ,"inlayHint.display": false
