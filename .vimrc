@@ -1,4 +1,4 @@
-" set termguicolors
+set termguicolors
 "Toggle termguicolors
 command TG execute "set termguicolors! termguicolors?"
 
@@ -236,6 +236,11 @@ autocmd FileType python BracelessEnable +indent "braceless option"
 
 Plugin 'fedorenchik/qt-support.vim'
 
+"gist installation via Vundle BEGIN
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/vim-gist'
+"gist installation via Vundle END ":BundleInstall should be call after vim reboot"
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -308,9 +313,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 "Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}     "do not exists any more"
-
-nnoremap <Leader>q :Quickfix<CR>
-nnoremap <Leader>l :Quickfix!<CR>
+" nnoremap <Leader>q :Quickfix<CR>
+" nnoremap <Leader>l :Quickfix!<CR>
 
 Plug 'nblock/vim-dokuwiki'
 let dokuwiki_comment=1
@@ -865,148 +869,6 @@ let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
 
 " hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 
-"colo desert
-"colo elflord                   "clangd, simple +++"
-" colo murphy                    "dark,simple +"
-
-colo asmanian2         "dark, light back, wrecked?" fav
-" colo iangenzo           "dark coc
-
-"colo habiLight                 "light blue/white +++"
-"colo softbluev2                "dark, clang"
-"colo Tomorrow-Night-Blue       "dark, clang, hints"
-"colo mustang                   "dark, clang, ++" 
-"colo adventurous               "dark, clang"
-"colo wikipedia                 "dark2/light, clang"
-"colo corporation               "coc, dark2/light, clang"
-"colo contrastneed              "dark2/light, clang"
-
-"colo tabula                    "coc, simple" +++++++
-"colo tatami                    "coc, simple"fav
-"colo industry                  "clangd +++"
-"colo darkblue
-"colo darkZ                     "clangd
-"colo koehler
-"colo sublimemonokai
-
-"colo desert256v2 "doesn't show git signs ?
-"colo desert256                  "fav"
-
-"colo derefined                 "dark, simple, clangd"
-"colo cyberpunk                 "dark, clangd, termgui"
-
-"colo summerfruit256            "coc, light"
-"colo devbox-dark-256
-"colo lizard256                 "+"
-"colo twilight256               "clangd, dark2"
-"colo lapis256                  "dark, clangd, tgui, +"
-"colo oceanblack256.vim
-"colo tigrana-256-dark
-"colo seoul256                  "++" clangd, dark, 
-
-"colo Chasing_Logic             "coc"
-"-----------------------
-"colo colorzone                 "light, clang"
-"colo PapayaWhip                "light"
-"colo PaperColor                "dark"
-"colo sole                      "light"
-"colo lingodirector             "light2, blue"
-"colo bluish                    "simple, dark"
-"colo miko                      "dark "+
-"colo Tomorrow                  "light2, clang"
-"colo VIvid                     "coc highlight, dark"
-
-"colo calmar256-dark            "+
-"colo desert256v2 
-"colo darkblue2                 "dark, clang"
- 
-"colo candy             "dark ++"
-"colo madeofcode        "dark, clang +
-
-"colo BlackSea
-
-"colo cake              "light +
-
-"colo materialbox       "strongly depeng on term/gui mode"
-"colo mayansmoke        "light2, clang, coc, highlight"
-"colo messy             "light, contrast"
-"colo moss              "dark,clang,simple"
-"colo moonshine_minimal "dark"
-"colo mushroom          "very dark"
-"colo alduin            "dark2, clang"
-"colo antares           "dark, clang"
-"colo apprentice        "dark, term, simple"
-"colo archery           "dark"
-"colo monokai-chris     "dark, clang"
-"colo monokai-phoenix   "dark c
-
-"colo aurora            "light, useless"
-"colo autumn            "light2, clang, term"
-"colo autumnleaf        "light contrast +
-"colo badwolf           "dark warm +
-"colo baycomb           "dark, term"
-"colo beauty256         "light"
-"colo beekai            "dark, clang, term"
-"colo bensday           "dark, almost copy of asmanian2
-"colo birds-of-paradise "dark, warmred, useless"
-"colo black_angus       "dark, green
-"colo blazer            "dark, warm +, fav, clangd, term"
-"colo borland           "dark, blue bg, gui"
-"colo bubblegum-256-light   "light"
-"colo busybee               "dark, term, clang"
-"colo burnttoast256         "dark +"
-"colo automation            "term dark, gui light", +
-"colo gentooish             "dark, gui"
-"colo railscasts            "dark"
-
-"test
-"colo reloaded              "dark green, term/gui dark2, simple"
-"colo lilydjwg_dark         "dark2, simple"
-
-"colo astronaut             "dark, clang, simple"
-"colo desertEx              "dark" +
-"colo monoacc               "dark"
-"colo marklar               "dark"  + hints
-"colo desertedocean         "dark" 
-"colo desertink             "dark"  ++
-"colo contrasty             "dark" clangd
-"colo Atelier_DuneDark      "dark, clangd, hints, darktext" ++
-"colo Atelier_ForestDark      "dark, clangd, hints, lightertext" ++
-"colo Atelier_SulphurpoolDark      "dark, clangd, hints, lightertext, light bg" ++
-"colo ayu
-"colo behelit
-"colo buddy
-"colo codeblocks_dark
-"colo cool
-"colo denim
-"colo C64
-"colo deus
-"colo doorhinge
-"colo dual
-"colo dzo
-"colo editplus
-"colo edo_sea
-"colo fairyfloss
-"colo far
-"colo flatui
-"colo fokus
-"colo gardener
-"colo gemcolors
-"colo getafe
-"colo ghostbusters
-"colo golded
-"colo gravity
-"colo graywh
-"colo gruvbox
-"colo graygool
-"colo herokudoc
-"colo hual
-"colo impactjs
-"colo kalisi
-
-"get colorscheme name"
-"echo g:colors_name
-
 syntax on
 set hlsearch
 
@@ -1090,34 +952,9 @@ endif
 "set makeprg=~/scripts/g_script_opt.sh\ $*
 "set makeprg=~/scripts/g_script.sh\ $*
 
-hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
+" hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 
 
-if &diff
-    set lines=999 columns=222
-    set scrollbind
-    " set diffopt+=iwhiteall
-
-    colorscheme contrastneed        "clangd  ++
-    "colorscheme wikipedia
-    "colorscheme oceanblack256      "clangd
-    "colorscheme doriath
-    "colorscheme BlackSea
-    "colorscheme peachpuff
-    "colorscheme slate
-    "colorscheme elflord            "clangd
-    "
-    "sublimemonokai
-    if has("gui_running")
-        if has("gui_gtk2")
-            set guifont=Monospace\ 7
-            ""set guifont=Verdana\ 13
-        elseif has("gui_win32")
-            set guifont=Consolas:h11:cANSI
-        endif
-    endif
-
-endif
 """""""""""""""""""""""""
 
 noremap <Up> <Nop>
@@ -1303,3 +1140,233 @@ if has("gui_running")
 endif
 
 let g:netrw_sizestyle = "H"
+
+"colo default
+"colo desert
+"colo elflord                   "clangd, simple +++"
+"colo murphy                    "dark,simple +"
+
+"colo asmanian2                  "dark, brbg, wrecked? fav""
+"colo seoul256                  "clangd, coc, dark, brbg, sandy, contra, classic +++++"
+"colo blazer                    "dark, warm +, contra, clangd, term, blue/red, bbg"
+
+"colo cyberpunk                 "dark, clangd, coc, red"
+
+"colo robinhood                 "dark, clang, coc ++++"
+"colo deus                      "dark, soft, clangd, coc, khaki/red"
+"colo welpe                     "dark, clang, coc?"
+"colo sift                      "dark, clang, coc?"
+
+"colo adventurous               "dark, clang, coc +++"
+"colo Tomorrow-Night-Blue       "dark, bg9, clang, hints, coc? +++"
+"colo Tomorrow-Night-Bright     "bbg, +++"
+"colo Tomorrow-Night-Eighties   "bg9"
+"colo Tomorrow-Night            "dim"
+"colo Tomorrow                  "light"
+"colo 
+
+"colo fokus                     "light, clangd, coc, soft, milky bg +"
+"colo mayansmoke                "light2, clang, coc, highlight, light peach bg +++++"
+"colo autumn                    "light2, clang, term"
+"colo colorzone                 "light, clang, coc, wbg"
+"colo materialbox               "light ?, clangd, coc, contra, bg9 +"
+"colo editplus                  "light2, wbg, clang, coc, contra "
+"colo softlight                 "light"
+
+
+"colo atom
+" colo tatami                    "coc, simple, clangd, brbg + depends on history"
+
+"colo darkblue2                 "dark, clang"
+"colo darkslategray             "dark, clang"
+"colo softbluev2                "dark, bluebg, clang, coc, brbg ++"
+"colo softbluev                 "dark, bluebg, clang, coc, brbg ++"
+"colo xian                      "coral bg"
+"colo derefined                 "dark, simple, clangd, brbg, coc"
+
+"colo shadesofamber             "dark, clang"
+"colo settlemyer                "dark, clang"
+"colo cool                      "dark, clang, coc?, bbg, contra "
+"colo vorange                   "dark2, dark blue, dim"
+
+"colo gardener                  "dark, clang, coc?, soft, bbg, contra"
+"colo astronaut                 "dark, clang, simple, blue, blue bg"
+"colo dzo                       "dark, bbg, soft, clang, coc?, green/blue"
+
+"colo marklar                   "dark, asmanian2-tabula like"  + hints
+"colo mushroom                  "very dark"
+"colo Black                     "contra, green, bbg"
+"colo miko                      "dark, contra2, blue "
+"colo bluish                    "simple, dark, bg9, green, contra2 ++"
+" colo iangenzo                 "dark coc"
+
+"colo habiLight                 "light blue/white +"
+"colo PapayaWhip                "light, peach bg"
+"colo lingodirector             "light2, blue, wbg"
+"colo cake                      "light2, blue, wbg +"
+
+"colo mustang                   "dark, clang, coc?  +" 
+
+"colo wikipedia                 "dark2/light, clang, coc"
+"colo corporation               "coc, dark2/light, clang"
+"colo contrastneed              "dark2/light, clang, diff"
+"colo contrasty                 "dark clangd"
+
+"colo industry                  "dark, clangd +"
+"colo darkZ                     "clangd, coc +"
+"colo darkblue
+"colo tabula                    "coc, simple +" 
+"colo koehler                   "dark, classic"
+"colo sublimemonokai            "dark, coc "
+
+"colo desert256v2               "doesn't show git signs ?"
+"colo desert256                 "classic"
+
+
+"colo summerfruit256            "coc, light, red"
+"colo devbox-dark-256           "depends on history"
+"colo lizard256                 "+"
+
+"colo twilight256               "clangd, dark2, coc"
+"colo lapis256                  "dark, clangd, coc, blue"
+"colo oceanblack256              "dark, clangd,"
+"colo Chasing_Logic             "coc, clangd, dark2, blue/purple "
+"colo madeofcode                "dark, clang +"
+
+"colo tigrana-256-dark          "dark2, purple"
+"-----------------------
+"colo PaperColor                "depends on history"
+"colo sole                      "light"
+"colo VIvid                     "coc highlight, dark, red"
+
+"colo calmar256-dark            "blue, contra"
+ 
+"colo candy             "dark, contra "
+"colo candycode         "dark, contra "
+
+"colo BlackSea
+
+
+"colo messy             "light, contrast, wbg"
+"colo moss              "dark,clang,simple,bbg"
+"colo PerfectDark       "clang, coc, blue, bbg, cool menu"
+"colo moonshine_minimal "dark"
+"colo alduin            "dark2, clang"
+"colo antares           "dark, clang, blue"
+"colo apprentice        "dark2, term, simple"
+"colo archery           "dark2, blue"
+"colo monokai-chris     "dark, clang, contra"
+"colo monokai-phoenix   "dark c
+
+"colo aurora            "light, useless"
+"colo autumnleaf        "light contrast +
+"colo badwolf           "dark warm +
+"colo baycomb           "dark, term"
+"colo beauty256         "light"
+"colo beekai            "dark, clang, term"
+"colo bensday           "dark, almost copy of asmanian2
+"colo birds-of-paradise "dark, warmred, useless"
+"colo black_angus       "dark, green
+"colo borland           "dark, blue bg, gui"
+"colo bubblegum-256-light   "light"
+"colo busybee               "dark, term, clang"
+"colo burnttoast256         "dark +"
+"colo automation            "term dark, gui light", +
+"colo gentooish             "dark, gui"
+"colo railscasts            "dark"
+
+"test
+"colo reloaded              "dark green, term/gui dark2, simple"
+"colo lilydjwg_dark         "dark2, simple"
+
+"colo desertEx              "dark" +
+"colo monoacc               "dark"
+"colo desertedocean         "dark" 
+"colo desertink             "dark"  ++
+"colo Atelier_DuneDark      "dark, clangd, hints, darktext" ++
+"colo Atelier_ForestDark      "dark, clangd, hints, lightertext" ++
+"colo Atelier_SulphurpoolDark      "dark, clangd, hints, lightertext, light bg" ++
+"colo ayu                           "dark"
+"colo behelit                       "dark2"
+"colo buddy
+"colo codeblocks_dark
+"colo denim
+"colo C64                           "light blue"
+"colo doorhinge
+"colo dual                          "light"
+"colo dusk
+"colo dutone-darkmedow              
+"colo edo_sea                       "dark, blue"
+"colo fairyfloss
+"colo far
+"colo flatui
+"colo gemcolors
+"colo getafe
+"colo ghostbusters
+"colo golded
+"colo gravity
+"colo graywh
+"colo gruvbox
+"colo graygool
+"colo herokudoc
+"colo hual
+"colo impactjs
+"colo kalisi
+"colo vim-material
+"colo Slate                         "asmanian2"
+"colo atom
+"colo seagull                       "light"
+"colo sf                            "light, useless"
+"colo silent                        "light2, clang"
+"colo simple256                     "dark"
+
+"get colorscheme name"
+"echo g:colors_name
+
+
+function! IsNightTime()
+
+  let current_hour = str2nr(strftime("%H"))
+  return current_hour >= 0 && current_hour < 11
+endfunction
+
+if IsNightTime()
+    " colo seoul256
+    " colo robinhood
+    " colo welpe
+    colo deus
+else
+    " colo fokus
+    " colo softbluev2                 
+    " colo darkslategray            
+    " colo darkblue2                
+    colo atom "with atom - dark tatami, without atom - light tatami"
+    colo tatami
+endif
+
+if &diff
+    set lines=999 columns=222
+    set scrollbind
+    " set diffopt+=iwhiteall
+
+    colorscheme contrastneed        "clangd  ++
+    "colorscheme wikipedia
+    "colorscheme oceanblack256      "clangd
+    "colorscheme doriath
+    "colorscheme BlackSea
+    "colorscheme peachpuff
+    "colorscheme slate
+    "colorscheme elflord            "clangd
+    "
+    "sublimemonokai
+    if has("gui_running")
+        if has("gui_gtk2")
+            set guifont=Monospace\ 7
+            ""set guifont=Verdana\ 13
+        elseif has("gui_win32")
+            set guifont=Consolas:h11:cANSI
+        endif
+    endif
+
+endif
+
