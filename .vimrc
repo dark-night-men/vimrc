@@ -1,3 +1,4 @@
+let mapleader = " "
 set termguicolors
 "Toggle termguicolors
 command TG execute "set termguicolors! termguicolors?"
@@ -221,6 +222,35 @@ Plugin 'zencoding.vim'
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'preservim/nerdcommenter'                "\cc \cn "
+
+" <Leader>cc Comment out the current line or text selected in visual mode.
+" <Leader>cn Same as <Leader>cc but forces nesting.
+
+" <Leader>c<space> 
+" Toggles the comment state of the selected line(s). If the topmost selected
+" line is commented, all selected lines are uncommented and vice versa.
+
+" <Leader>cm Comments the given lines using only one set of multipart delimiters.
+" <Leader>ci Toggles the comment state of the selected line(s) individually.
+" <Leader>cs Comments out the selected lines ``sexily''
+" <Leader>cy Same as <Leader>cc except that the commented line(s) are yanked first.
+" <Leader>c$ Comments the current line from the cursor to the end of line.
+
+" <Leader>cA Adds comment delimiters to the end of line and goes into insert mode between
+" them.
+
+" |NERDCommenterInsert|
+" Adds comment delimiters at the current cursor position and inserts between.
+" Disabled by default.
+
+" <Leader>ca Switches to the alternative set of delimiters.
+
+" <Leader>cl NERDCommenterAlignLeft
+" <Leader>cb NERDCommenterAlignBoth
+" Same as NERDCommenterComment except that the delimiters are aligned down the
+" left side (<Leader>cl) or both sides (<Leader>cb).
+
+" <Leader>cu NERDCommenterUncomment
 
 Plugin 'mattn/emmet-vim'                "for html?"
 
@@ -455,13 +485,22 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation
-nmap <silent> g6 <Plug>(coc-definition)
+" nmap <silent> g6 <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
+" autocmd FileType cpp nnoremap <silent> <buffer> gd <Plug>(coc-definition)
+autocmd FileType cpp nnoremap <silent> <buffer> gd :call GoToDefinition()<CR>
+function! GoToDefinition()
+    call CocAction('jumpDefinition')
+    normal zR zz
+endfunction
+
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
+" nnoremap <silent> K :call ShowDocumentation()<CR>
+autocmd FileType cpp nnoremap <silent> <buffer> K :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
