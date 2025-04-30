@@ -712,7 +712,8 @@ let g:coc_snippet_next = '<tab>'
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 "coc floating colors dirty hack
-if 1 && !has("gui_running")
+" if 1 && !has("gui_running")
+if 1 
 
 func! s:my_colors_setup() abort
     " this is an example
@@ -741,7 +742,12 @@ func! s:my_colors_setup() abort
     " if termguicolors is OFF, then colors are taking from ctermbg and ctermfg  
     " if termguicolors is ON, then colors are taking from guibg and guifg  
     "CocHighlightText linked to CursorColumn
-    hi CursorColumn   term=reverse ctermbg=red ctermfg=white guibg=Red guifg=White
+    if has("gui_running")
+        hi CursorColumn   guibg=yellow 
+    else
+        hi CursorColumn   term=reverse ctermbg=red ctermfg=white guibg=Red guifg=White
+    endif
+
 
     "*darkred
     " hi CocFloating ctermfg=white ctermbg=1 guibg=DarkBlue
@@ -873,26 +879,6 @@ set tabpagemax=10
   highlight Constant gui=NONE guibg=grey95
   highlight Special gui=NONE guibg=grey95
 
-
-"if has("gui_running")
-"  if has("gui_gtk2")
-"    set guifont=Courier\ 10\ Pitch\ 12
-"  elseif has("gui_win32")
-"    set guifont=Consolas:h11:cANSI
-"  endif
-"endif
-
-if has("gui_running")
-  if has("gui_gtk2")
-
-    set guifont=Monofur\ Nerd\ Font\ Mono\ 24
-
-    "set guifont=Verdana\ 13
-    "set guifont=Monospace\ 13
-  elseif has("gui_win32")
-    set guifont=Consolas:h11:cANSI
-  endif
-endif
 
 filetype off
 filetype plugin indent on
@@ -1180,6 +1166,16 @@ endif
 
 let g:netrw_sizestyle = "H"
 
+" Hacks to enable italic font in vim
+" set t_ZH=^[[3m
+" set t_ZR=^[[23m
+
+" set t_ZH=[3m
+" set t_ZR=[23m
+
+" let &t_ZH="\e[3m"
+" let &t_ZR="\e[23m"
+
 "colo default
 "colo desert
 "colo elflord                   "clangd, simple +++"
@@ -1369,18 +1365,44 @@ function! IsNightTime()
   return current_hour >= 0 && current_hour < 11
 endfunction
 
-if IsNightTime()
-    " colo seoul256
-    " colo robinhood
-    " colo welpe
-    colo deus
+"if has("gui_running")
+"  if has("gui_gtk2")
+"    set guifont=Courier\ 10\ Pitch\ 12
+"  elseif has("gui_win32")
+"    set guifont=Consolas:h11:cANSI
+"  endif
+"endif
+
+if has("gui_running")
+
+    if has("gui_gtk2")
+
+        set guifont=IosevkaTerm\ Nerd\ Font\ Mono\ 14
+        " set guifont=Monofur\ Nerd\ Font\ Mono\ 24
+
+        "set guifont=Verdana\ 13
+        "set guifont=Monospace\ 13
+    elseif has("gui_win32")
+        set guifont=Consolas:h11:cANSI
+    endif
+
+    colo Tomorrow
+    colo materialbox
 else
-    " colo fokus
-    " colo softbluev2                 
-    " colo darkslategray            
-    " colo darkblue2                
-    colo atom "with atom - dark tatami, without atom - light tatami"
-    colo tatami
+
+    if IsNightTime()
+        " colo seoul256
+        " colo robinhood
+        " colo welpe
+        colo deus
+    else
+        " colo fokus
+        " colo softbluev2                 
+        " colo darkslategray            
+        " colo darkblue2                
+        colo atom "with atom - dark tatami, without atom - light tatami"
+        colo tatami
+    endif
 endif
 
 if &diff
@@ -1408,4 +1430,3 @@ if &diff
     endif
 
 endif
-
