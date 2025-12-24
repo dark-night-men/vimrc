@@ -1,4 +1,4 @@
-let mapleader = " "
+" let mapleader = " "
 set termguicolors
 "Toggle termguicolors
 command TG execute "set termguicolors! termguicolors?"
@@ -78,7 +78,17 @@ Plugin 'Shougo/unite.vim'
 Plugin 'mbbill/undotree'
 
 "Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'             "Mantaining stopped"
+"Plugin 'vim-syntastic/syntastic'
+
+"let g:syntastic_echo_current_error = 0
+"for syntastic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_cpp_compiler = 'clang++'
+" let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
+
 
 Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
@@ -145,30 +155,11 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vimwiki/vimwiki'
 "Plugin 'tenfyzhong/CompleteParameter.vim'
 "Plugin 'rust-lang/rust.vim'
-"Plugin 'vim-syntastic/syntastic'
 "Plugin 'rhysd/vim-grammarous'
 "Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'SidOfc/mkdx'
 "Plugin 'dhruvasagar/vim-table-mode'
 
-if 0
-if empty($ALEDISABLED)
-    Plugin 'dense-analysis/ale'
-    nmap <silent> <leader>aj :ALENext<cr>
-    nmap <silent> <leader>ak :ALEPrevious<cr>
-
-    " nmap <F9> <Plug>(ale_fix) "to implement alefixer
-
-    " Map movement through errors without wrapping.
-    nmap <silent> <C-k> <Plug>(ale_previous)
-    nmap <silent> <C-j> <Plug>(ale_next)
-
-    " OR map keys to use wrapping.
-    " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-    " nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-endif
-endif
 
 "Plugin 'dkprice/vim-easygrep'
 "EasyGrep options
@@ -193,9 +184,9 @@ Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsExpandTrigger="<c-j>"                    "conflict with coc-snippets"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -354,14 +345,37 @@ Plug 'liuchengxu/vim-which-key'
 " On-demand lazy load
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
-"if has('nvim')
-"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-"  Plug 'Shougo/deoplete.nvim'
-"  Plug 'roxma/nvim-yarp'
-"  Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-"let g:deoplete#enable_at_startup = 1
+if 0 
+
+"deoplete and clang extension
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+Plug 'zchee/deoplete-clang'
+
+let g:deoplete#sources#clang#debug = 1
+let g:deoplete#sources#clang#flags = ['-x', 'c++']
+let g:deoplete#sources#clang#libclang_path = '/usr/local/llvm_custom_01/lib/libclang.so'
+" let g:deoplete#sources#clang#libclang_path =  '/usr/lib/llvm-18/lib/libclang.so'
+
+let g:deoplete#sources#clang#clang_header = '/usr/local/llvm_custom_01/lib/clang'
+" let g:deoplete#sources#clang#clang_header = '/usr/local/llvm_custom_01/lib/clang/21/include'
+let g:deoplete#sources#clang#std = { 'cpp': 'c++2b' }
+let g:deoplete#sources#clang#clang_complete_database = '/home/zerg/project/books/Josuttis/STD11/code/cont'
+
+let g:deoplete#sources#clang#sort_algo = ''
+let g:deoplete#sources#clang#default_file = ''
+let g:deoplete#sources#clang#test_extensions = {'.h': ['.c', '.cpp', '.m', '.mm'], '.hpp': ['.cpp']}
+
+let g:deoplete#sources#clang#include_default_arguments = 0
+let g:deoplete#sources#clang#filter_availability_kinds = []
+endif
 
 " To register the descriptions when using the on-demand load feature,
 " use the autocmd hook to call which_key#register(), e.g., register for the Space key:
@@ -483,6 +497,7 @@ endif
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <SPACE>D :CocDiagnostics<CR>
 
 " GoTo code navigation
 " nmap <silent> g6 <Plug>(coc-definition)
@@ -494,9 +509,16 @@ function! GoToDefinition()
     normal zR zz
 endfunction
 
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
+
+nmap <silent> ,.d <Plug>(coc-definition)
+nmap <silent> ,.c <Plug>(coc-declaration)
+nmap <silent> ,.t <Plug>(coc-type-definition)
+nmap <silent> ,.i <Plug>(coc-implementation)
+nmap <silent> ,.r <Plug>(coc-references-used)
+nmap <silent> ,.R <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 " nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -592,7 +614,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Show all diagnostics
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>  " Commented  out since shortcut is using in ALE"
 " Show commands
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
@@ -696,15 +718,15 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 
 
 inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
+            \ coc#pum#visible() ? coc#_select_confirm() :
+            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+            \ CheckBackspace() ? "\<TAB>" :
+            \ coc#refresh()
 
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! CheckBackspace() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
 let g:coc_snippet_next = '<tab>'
 
@@ -716,6 +738,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 if 1 
 
 func! s:my_colors_setup() abort
+
+    " if !has("gui_running")
+
     " this is an example
     " hi Pmenu guibg=#d7e5dc gui=NONE
     " hi PmenuSel guibg=#b7c7b7 gui=NONE
@@ -738,15 +763,7 @@ func! s:my_colors_setup() abort
     hi CocFloating ctermfg=white ctermbg=1 
 
     " blue darkgrey magenta cyan
-
-    " if termguicolors is OFF, then colors are taking from ctermbg and ctermfg  
-    " if termguicolors is ON, then colors are taking from guibg and guifg  
-    "CocHighlightText linked to CursorColumn
-    if has("gui_running")
-        hi CursorColumn   guibg=yellow 
-    else
-        hi CursorColumn   term=reverse ctermbg=red ctermfg=white guibg=Red guifg=White
-    endif
+    " endif
 
 
     "*darkred
@@ -769,6 +786,18 @@ func! s:my_colors_setup() abort
     hi CocWarningFloat ctermfg=4 ctermbg=3
     hi CocInfoFloat ctermfg=white ctermbg=4
 
+
+    " if termguicolors is OFF, then colors are taking from ctermbg and ctermfg  
+    " if termguicolors is ON, then colors are taking from guibg and guifg  
+    "CocHighlightText linked to CursorColumn
+    if has("gui_running")
+        " hi CursorColumn   guibg=yellow 
+        " hi CocMenuSel   guibg=green
+        hi CursorColumn   guibg=red
+        hi CocMenuSel   guibg=red
+    else
+        hi CursorColumn   term=reverse ctermbg=red ctermfg=white guibg=Red guifg=White
+    endif
 endfunc
 
 augroup colorscheme_coc_setup | au!
@@ -808,7 +837,122 @@ Plug 'inkarkat/vim-ingo-library'
 
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 Plug 'editorconfig/editorconfig-vim'
-Plug 'cdelledonne/vim-cmake'
+" Plug 'cdelledonne/vim-cmake'
+
+" ALE tweaks
+if 1
+    Plug 'dense-analysis/ale'
+
+    let g:ale_enabled = 1                                   "ALEToggle"
+    command AG execute "ALEToggle"
+
+
+    " Use ALE and also some plugin 'foobar' as completion sources for all code.
+    " call deoplete#custom#option('sources', {
+		" \ '_': ['ale', 'foobar'],
+		" \})
+
+    " call deoplete#custom#source('ale', 'dup', v:true)
+    
+
+    nmap <silent> <leader>aj :ALENext<cr>
+    nmap <silent> <leader>ak :ALEPrevious<cr>
+
+    nmap <F9> <Plug>(ale_fix) "to implement alefixer
+    nmap <space>11 <Plug>(ale_fix) "to implement alefixer
+
+"     " Map movement through errors without wrapping.
+"     " nmap <silent> <C-k> <Plug>(ale_previous)
+"     nmap <silent> <C-k>  :call ALEPrevious_zz()<CR>
+"     function! ALEPrevious_zz()
+"         ALEPrevious
+"         " normal zz zv
+"     endfunction
+
+"     " nmap <silent> <C-j> <Plug>(ale_next)
+"     nmap <silent> <C-j> :call ALENext_zz()<CR>
+"     function! ALENext_zz()
+"         normal $
+"         ALENext<CR>
+"         normal zv
+"         normal z.
+"     endfunction
+
+
+    " OR map keys to use wrapping.
+    " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    " nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+    " Display detail of the error
+    let g:ale_cursor_detail = 0
+    nmap <silent> <SPACE>e :ALEDetail<CR>
+
+ 
+    let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
+
+    "   with :CocConfig and add `"diagnostic.displayByAle": true`
+    let g:ale_disable_lsp = 1
+    " Fix new-line characters in code-diagnostic messages from CoC
+    let g:ale_other_source_text_line_separator = "    "
+
+    " When to run linters
+    "let g:ale_lint_on_enter = 0
+    "let g:ale_lint_on_text_changed = "never"
+    "let g:ale_lint_on_insert_leave = 0
+    "let g:ale_lint_on_save = 0
+    "let g:ale_lint_on_filetype_changed = 0
+
+    " let g:ale_lint_on_enter = 1
+    " let g:ale_lint_on_text_changed = "normal"
+    " let g:ale_lint_on_insert_leave = 1
+    " let g:ale_lint_on_save = 1
+    " let g:ale_lint_on_filetype_changed = 1
+
+    " Allow fixing files when they are saved
+    let g:ale_fix_on_save = 0
+    " Nice linter processes
+    "let g:ale_command_wrapper = 'nice -n19 ionice -c3'
+    " Error highlighting
+    let g:ale_set_highlights = 1
+    let g:ale_set_signs = 1
+    let g:ale_sign_highlight_linenrs = 0
+
+    " let g:ale_sign_error = '>A'
+    " let g:ale_sign_warning = ')A'
+    let g:ale_sign_error = " "
+    let g:ale_sign_warning = " "
+    let g:ale_sign_info = " "
+
+    let g:ale_sign_style_error = " "
+    let g:ale_sign_style_warning = " "
+
+    " Format for linter messages
+    let g:ale_echo_msg_error_str = "err"
+    let g:ale_echo_msg_warning_str = "warn"
+    let g:ale_echo_msg_info_str = "info"
+    let g:ale_echo_msg_log_str = "log"
+    let g:ale_echo_msg_format = "%linter% [%severity%(%code%)]: %s"
+    let g:ale_lsp_show_message_format = g:ale_echo_msg_format
+    let g:ale_virtualtext_cursor = 1
+    let g:ale_virtualtext_delay = 10
+    "let g:ale_virtualtext_prefix = "    <!! "
+    let g:ale_virtualtext_prefix = "     "
+    let g:ale_virtualtext_suffix = " "
+
+    " Display information in floating windows
+    let g:ale_set_balloons = 1
+    let g:ale_floating_preview = 1
+    let g:ale_hover_to_floating_preview = 1
+    let g:ale_detail_to_floating_preview = 1
+
+    let b:ale_linters = 'all'
+
+    let s:ale_fixers_cpp = [ 'remove_trailing_lines', 'clang-format', 'clangtidy' ]
+    let g:ale_fixers = { 'cpp': s:ale_fixers_cpp  }
+    let g:ale_cpp_cc_options = '-std=c++2b  -Wall -pedantic -Werror -Wextra --verbose'
+    let g:ale_cpp_cc_executable = '/usr/local/llvm_custom_01/bin/clang'
+
+endif
 
 " Initialize plugin system
 call plug#end()
@@ -853,9 +997,9 @@ map <F5> :exec("cs f s ".expand("<cword>"))<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F6> :TlistToggle<CR>
 
-map <Leader>e :MBEOpen<cr>
-map <Leader>c :MBEClose<cr>
-map <Leader>t :MBEToggle<cr>
+" map <Leader>e :MBEOpen<cr>        "outdated?"
+" map <Leader>c :MBEClose<cr>
+" map <Leader>t :MBEToggle<cr>
 
 set cindent
 set smartindent
@@ -883,14 +1027,6 @@ set tabpagemax=10
 filetype off
 filetype plugin indent on
 syntax on
-
-"let g:syntastic_echo_current_error = 0
-"for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
 
 " hi Comment ctermfg=cyan cterm=bold guifg=#FF00FF
 
@@ -1018,7 +1154,8 @@ endif
 nnoremap gw :grep <cword> . <cr>
 
 
-set foldmethod=indent
+" set foldmethod=indent
+set foldmethod=syntax
 
 set cursorline
 "set cursorcolumn
@@ -1377,7 +1514,7 @@ if has("gui_running")
 
     if has("gui_gtk2")
 
-        set guifont=IosevkaTerm\ Nerd\ Font\ Mono\ 14
+        set guifont=IosevkaTerm\ Nerd\ Font\ Mono\ 15
         " set guifont=Monofur\ Nerd\ Font\ Mono\ 24
 
         "set guifont=Verdana\ 13
@@ -1386,7 +1523,12 @@ if has("gui_running")
         set guifont=Consolas:h11:cANSI
     endif
 
-    colo Tomorrow
+
+    if IsNightTime()
+        colo Dark
+    else
+        colo Tomorrow
+    endif
     colo materialbox
 else
 
@@ -1400,8 +1542,16 @@ else
         " colo softbluev2                 
         " colo darkslategray            
         " colo darkblue2                
-        colo atom "with atom - dark tatami, without atom - light tatami"
-        colo tatami
+
+        " colo atom "with atom - dark tatami, without atom - light tatami"
+        " colo tatami
+
+        "grape
+
+        " colo White2 "with White2 - dark materialbox, without White2 - light materialbox"
+        " colo materialbox
+
+        colo gravity
     endif
 endif
 
@@ -1430,3 +1580,8 @@ if &diff
     endif
 
 endif
+
+
+"added to the end since otherwise functions dont exist
+" call deoplete#custom#source('ale', 'dup', v:true)
+" call deoplete#custom#option('sources', { '_': ['ale'] })
